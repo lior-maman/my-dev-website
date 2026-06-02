@@ -20,12 +20,12 @@ html(lang="en")
       .container-fluid
         a.navbar-brand.fw-bold(href="#intro") LM
 
-        // כפתור ההמבורגר שיופיע רק בנייד
+        // הכפתור כעת באותו קו של הלוגו (הם אחים בתוך ה-container)
         button.navbar-toggler(type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation")
           span.navbar-toggler-icon
 
-        // תפריט הקישורים שמתקפל
-        #navbarNav.collapse.navbar-collapse.justify-content-end
+        // ה-ul כעת מוזח פנימה, מה שאומר שהוא הבן של #navbarNav ויתקפל איתו בנייד
+        #navbarNav.collapse.navbar-collapse.justify-content-center
           ul.navbar-nav.gap-2
             li.nav-item
               a.nav-link.scrolly(href="#intro" class=(path === '#intro' ? 'active' : '')) Intro
