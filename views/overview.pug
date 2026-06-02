@@ -15,22 +15,26 @@ html(lang="en")
 
   body.is-preload
 
-    // Navbar
-    nav.navbar
-      .nav-container
-        ul.nav-menu
-          li
-            a.scrolly(href="#intro" class=(path === '#intro' ? 'active' : ''))
-              span Intro  
-          li
-            a.scrolly(href="#two" class=(path === '#two' ? 'active' : ''))
-              span Tech Foundations
-          li
-            a.scrolly(href="#one" class=(path === '#one' ? 'active' : ''))
-              span Projects
-          li
-            a.scrolly(href="#three" class=(path === '#three' ? 'active' : ''))
-              span Tours Project
+
+    nav.navbar.navbar-expand-md.navbar-dark.bg-dark.fixed-top
+      .container-fluid
+        a.navbar-brand.fw-bold(href="#intro") LM
+
+        // כפתור ההמבורגר שיופיע רק בנייד
+        button.navbar-toggler(type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation")
+          span.navbar-toggler-icon
+
+        // תפריט הקישורים שמתקפל
+        #navbarNav.collapse.navbar-collapse.justify-content-end
+          ul.navbar-nav.gap-2
+            li.nav-item
+              a.nav-link.scrolly(href="#intro" class=(path === '#intro' ? 'active' : '')) Intro
+            li.nav-item
+              a.nav-link.scrolly(href="#two" class=(path === '#two' ? 'active' : '')) Tech Foundations
+            li.nav-item
+              a.nav-link.scrolly(href="#one" class=(path === '#one' ? 'active' : '')) Projects
+            li.nav-item
+              a.nav-link.scrolly(href="#three" class=(path === '#three' ? 'active' : '')) Tours Project
 
     #wrapper
       // Intro (מבוסס בוטסטראפ נקי, ללא תלות בתבנית)
