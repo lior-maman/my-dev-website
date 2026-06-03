@@ -15,15 +15,13 @@ html(lang="en")
 
   body.is-preload
 
-    nav.navbar.navbar-expand-md.navbar-dark.bg-dark.fixed-top
+    nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.fixed-top
       .container-fluid
         a.navbar-brand.fw-bold(href="#intro") LM
 
-        // הכפתור כעת באותו קו של הלוגו (הם אחים בתוך ה-container)
         button.navbar-toggler(type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation")
           span.navbar-toggler-icon
 
-        // ה-ul כעת מוזח פנימה, מה שאומר שהוא הבן של #navbarNav ויתקפל איתו בנייד
         #navbarNav.collapse.navbar-collapse.justify-content-center
           ul.navbar-nav.gap-2
             li.nav-item
@@ -157,17 +155,3 @@ html(lang="en")
     script(src="/assets/js/admin.js")
       // Bootstrap (חייב להישאר אחרון ברשימה המקורית)
     script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js")
-
-    // הסקריפט העוקף שלך ישירות בתוך ה-Pug
-    script.
-      document.addEventListener('DOMContentLoaded', () => {
-        const toggler = document.querySelector('.navbar-toggler');
-        const menu = document.querySelector('#navbarNav');
-
-        if (toggler && menu) {
-          toggler.addEventListener('click', (e) => {
-            e.preventDefault();
-            menu.classList.toggle('show');
-          });
-        }
-      });
