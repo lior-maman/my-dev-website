@@ -337,3 +337,41 @@ section {
   letter-spacing: 2px;
   color: #1a3a5f;
 }
+
+/* 1. עיצוב כפתור ההמבורגר עצמו (הקווים) שיהיו לבנים */
+.navbar-toggler {
+  border-color: rgba(255, 255, 255, 0.5); /* גבול חצי שקוף לכפתור */
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+  /* ה-SVG למעלה מבטיח ששלושת הקווים של ההמבורגר ייצבעו בלבן נקי */
+}
+
+/* 2. עיצוב אזור התפריט שנפתח במובייל */
+@media (max-width: 991.98px) {
+  .navbar-collapse {
+    background-color: rgba(
+      0,
+      0,
+      0,
+      0.85
+    ); /* רקע כהה חצי שקוף - שנה את ה-0.85 ל-0 אם אתה רוצה שקוף לחלוטין */
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 10px;
+  }
+
+  /* הפיכת כל הטקסטים והקישורים בתוך התפריט הפתוח ללבן */
+  .navbar-collapse .nav-link {
+    color: #ffffff !important;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-weight: 500;
+  }
+
+  /* אפקט מעבר עכבר/לחיצה על הקישורים בתפריט */
+  .navbar-collapse .nav-link:hover {
+    color: rgba(255, 255, 255, 0.75) !important;
+  }
+}
