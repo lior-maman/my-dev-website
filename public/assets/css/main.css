@@ -5,7 +5,7 @@
   --color-primary: #3b82f6; /* כחול מותג ראשי */
   --color-primary-dark: #1e3a8a; /* כחול כהה לכפתורים ואפקטים */
   --bg-special-white: #f8fafc; /* רקע בהיר ונקי לאתר */
-  --nav-bg: #1b1f22; /* נאב-בר כהה (נשאר כפי שהיה) */
+  --nav-bg: #1b1f22; /* נאב-בר כהה */
   --text-main: #1e293b; /* טקסט ראשי כהה וקריא */
   --nav-height: 60px;
   --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -54,7 +54,16 @@ body {
   overflow-x: hidden;
 }
 
-/* --- 4. נאב-בר (Navbar) מעודכן --- */
+.main-logo {
+  font-family: 'Oswald', sans-serif;
+  font-size: 3rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #1a3a5f;
+}
+
+/* --- 4. נאב-בר (Navbar) וכפתור המבורגר בסיסי --- */
 .navbar {
   position: fixed !important;
   top: 0;
@@ -131,6 +140,15 @@ body {
   border-color: var(--color-primary);
 }
 
+/* עיצוב כפתור ההמבורגר (הקווים) שיהיו לבנים בחשיפה למובייל */
+.navbar-toggler {
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
 /* --- 5. תיקון ה-Spotlights (תמונות הפורטפוליו) --- */
 .spotlights > section {
   display: flex !important;
@@ -169,7 +187,6 @@ section {
   justify-content: center;
 }
 
-/* שדרוג דרמטי לעמוד הבית ה"תלוש" */
 .hero-section {
   min-height: calc(85vh - var(--nav-height));
   background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 50%, #e2e8f0 100%);
@@ -178,7 +195,6 @@ section {
   overflow: hidden;
 }
 
-/* אפקט קו דקורטיבי מתחת לשם שלך המעניק מראה של הייטק */
 .hero-section h1.display-2 {
   font-weight: 700;
   color: #0f172a;
@@ -200,7 +216,6 @@ section {
   border-radius: 10px;
 }
 
-/* ריווח ונשימה לטקסט התיאור */
 .hero-section p.lead {
   max-width: 700px;
   line-height: 1.7;
@@ -209,7 +224,6 @@ section {
   margin-bottom: 35px;
 }
 
-/* כפתור אינטראקטיבי מודרני עם אפקט ריחוף (Hover) עשיר */
 .button,
 .btn-primary {
   background: linear-gradient(
@@ -235,36 +249,7 @@ section {
   filter: brightness(1.1);
 }
 
-/* --- 7. רספונסיביות (Mobile) --- */
-@media screen and (max-width: 736px) {
-  .navbar {
-    padding: 0 1rem;
-  }
-
-  .nav-menu {
-    gap: 0.5rem;
-  }
-
-  .nav-menu a span {
-    display: none;
-  }
-
-  .spotlights > section {
-    flex-direction: column !important;
-  }
-
-  .spotlights > section .image {
-    width: 100% !important;
-    height: 250px;
-  }
-
-  .hero-section {
-    padding: 40px 5%;
-    text-align: center;
-  }
-}
-
-/* --- 8. עיצוב ריבועי Tech Foundations --- */
+/* --- 7. עיצוב ריבועי Tech Foundations (דסקטופ) --- */
 .tech-stack {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -322,56 +307,78 @@ section {
   color: var(--color-primary-dark);
 }
 
+/* --- 8. 📱 בלוק רספונסיביות מאוחד והיררכי (Media Queries) --- */
+
+/* מסכים מתחת ל-992px (טאבלטים ומובייל של בוטסטראפ) */
+@media screen and (max-width: 991.98px) {
+  /* עיצוב אזור התפריט - ממורכז ומנותק מהקצוות */
+  .navbar-collapse {
+    background-color: rgba(0, 0, 0, 0.85);
+    padding: 20px;
+    border-radius: 12px;
+    margin-top: 10px;
+    margin-left: 12px;
+    margin-right: 12px;
+    text-align: center; /* ממרכז את תוכן הבלוק */
+  }
+
+  /* פריסת הרשימה לרוחב מלא למען מרכוז סימטרי */
+  .navbar-collapse .navbar-nav,
+  .navbar-collapse .nav-item {
+    width: 100%;
+    display: block;
+  }
+
+  /* מרכוז הקישורים עצמם וצביעתם בלבן */
+  .navbar-collapse .nav-link {
+    color: #ffffff !important;
+    display: inline-block;
+    text-align: center !important;
+    width: 100%;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    font-weight: 500;
+    font-size: 1.1rem;
+  }
+
+  .navbar-collapse .nav-link:hover {
+    color: rgba(255, 255, 255, 0.75) !important;
+  }
+}
+
+/* מסכים מתחת ל-736px (התאמות של תבנית Hyperspace המקורית) */
+@media screen and (max-width: 736px) {
+  .navbar {
+    padding: 0 1rem;
+  }
+
+  .nav-menu {
+    gap: 0.5rem;
+  }
+
+  .nav-menu a span {
+    display: none;
+  }
+
+  .spotlights > section {
+    flex-direction: column !important;
+  }
+
+  .spotlights > section .image {
+    width: 100% !important;
+    height: 250px;
+  }
+
+  .hero-section {
+    padding: 40px 5%;
+    text-align: center;
+  }
+}
+
+/* מסכים מתחת ל-480px (סמארטפונים קטנים בלבד) */
 @media screen and (max-width: 480px) {
   .tech-stack {
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
-  }
-}
-
-.main-logo {
-  font-family: 'Oswald', sans-serif;
-  font-size: 3rem;
-  font-weight: 400;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: #1a3a5f;
-}
-
-/* 1. עיצוב כפתור ההמבורגר עצמו (הקווים) שיהיו לבנים */
-.navbar-toggler {
-  border-color: rgba(255, 255, 255, 0.5); /* גבול חצי שקוף לכפתור */
-}
-
-.navbar-toggler-icon {
-  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
-  /* ה-SVG למעלה מבטיח ששלושת הקווים של ההמבורגר ייצבעו בלבן נקי */
-}
-
-/* 2. עיצוב אזור התפריט שנפתח במובייל */
-@media (max-width: 991.98px) {
-  .navbar-collapse {
-    background-color: rgba(
-      0,
-      0,
-      0,
-      0.85
-    ); /* רקע כהה חצי שקוף - שנה את ה-0.85 ל-0 אם אתה רוצה שקוף לחלוטין */
-    padding: 15px;
-    border-radius: 8px;
-    margin-top: 10px;
-  }
-
-  /* הפיכת כל הטקסטים והקישורים בתוך התפריט הפתוח ללבן */
-  .navbar-collapse .nav-link {
-    color: #ffffff !important;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    font-weight: 500;
-  }
-
-  /* אפקט מעבר עכבר/לחיצה על הקישורים בתפריט */
-  .navbar-collapse .nav-link:hover {
-    color: rgba(255, 255, 255, 0.75) !important;
   }
 }
