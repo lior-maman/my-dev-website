@@ -1,5 +1,5 @@
 doctype html
-html(lang="en")
+html(lang="en" dir="ltr")
   head
     meta(charset="utf-8")
     meta(name="viewport" content="width=device-width, initial-scale=1, user-scalable=no")
@@ -34,10 +34,9 @@ html(lang="en")
               a.nav-link.scrolly(href="#three" class=(path === '#three' ? 'active' : '')) Tours Project
 
     #wrapper
-      // Intro (מבוסס בוטסטראפ נקי, ללא תלות בתבנית)
+      // Intro Section
       section#intro.container-fluid.d-flex.flex-column.align-items-center.justify-content-center.text-center.min-vh-100.px-3
         div(style="max-width: 750px;")
-
           h1.main-logo LIOR MAMAN
           br
           p.lead.mb-5(style="color: #475569; line-height: 1.6;") Full-Stack Developer specializing in high-performance web applications, financial analytics, and data-driven systems.
@@ -81,7 +80,6 @@ html(lang="en")
               i.fas.fa-terminal.tech-icon
               span Command Line
 
-          // שינוי כאן: הוספת מעטפת למרכוז הכפתור
           .text-center.mt-5
             a.button.scrolly(href="#one") See My Projects
 
@@ -104,7 +102,7 @@ html(lang="en")
                       if project.tags
                         .mt-3.d-flex.flex-wrap.gap-1
                           each tag in project.tags
-                            span.badge.bg-secondary.me-1= tag
+                            span.badge.bg-secondary= tag
 
                     .card-footer.bg-transparent.border-top-0
                       .d-flex.justify-content-between.align-items-center
@@ -131,7 +129,7 @@ html(lang="en")
                         a.btn.btn-outline-primary.btn-sm(href=`/tour/${tour.slug}`) View Details
 
 
-      // Footer מעודכן וממורכז
+      // Footer Section
       footer#footer.py-5.mt-5(style="background-color: #f8fafc; border-top: 1px solid #e2e8f0;")
         .inner.container.text-center
           ul.nav.justify-content-center.mb-4
@@ -153,5 +151,4 @@ html(lang="en")
     script(src="/assets/js/util.js")
     script(src="/assets/js/main.js")
     script(src="/assets/js/admin.js")
-      // Bootstrap (חייב להישאר אחרון ברשימה המקורית)
     script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js")

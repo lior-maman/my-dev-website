@@ -1,9 +1,9 @@
 doctype html
-html(lang="en")
+html(lang="en" dir="ltr")
   head
     meta(charset="utf-8")
     meta(name="viewport" content="width=device-width, initial-scale=1, user-scalable=no")
-    title לוח בקרה ומערכת ניהול פרויקטים | Lior Maman
+    title CMS Dashboard & Project Management | Lior Maman
 
     // Main CSS
     link(rel="stylesheet" href="/assets/css/main.css")
@@ -21,7 +21,7 @@ html(lang="en")
         ul.nav-menu
           li
             a.scrolly(href="#intro" class=(path === '#intro' ? 'active' : ''))
-              span Intro  
+              span Intro    
           li
             a.scrolly(href="#two" class=(path === '#two' ? 'active' : ''))
               span Tech Foundations
@@ -33,13 +33,13 @@ html(lang="en")
               span Tours Project
 
     #wrapper
-      // Intro (מבוסס בוטסטראפ נקי, ללא תלות בתבנית)
+      // Intro Section
       section#intro.container-fluid.d-flex.flex-column.align-items-center.justify-content-center.text-center.min-vh-100.px-3
         div(style="max-width: 750px;")
           h1.main-logo CMS CONTROL PANEL
           br
-          p.lead.mb-5(style="color: #ea580c; font-weight: bold; line-height: 1.6;") מחובר במצב מנהל. השינויים שתבצע בכרטיסיות מטה יישמרו ישירות בבסיס הנתונים בזמן אמת.
-          a.button(href="/" style="background-color: #475569;") חזרה לאתר הראשי
+          p.lead.mb-5(style="color: #ea580c; font-weight: bold; line-height: 1.6;") Authenticated as Admin. Any modifications made to the project cards below will write directly to the database in real-time.
+          a.button(href="/" style="background-color: #475569;") Return to Main Site
 
       // Two - Tech Foundations
       section#two.wrapper.style3.fade-up
@@ -80,41 +80,41 @@ html(lang="en")
               span Command Line
 
           .text-center.mt-5
-            a.button.scrolly(href="#one") לעריכת הפרויקטים שלך
+            a.button.scrolly(href="#one") Edit Your Projects
 
-      // One - My Projects (ערוך ומותאם למצב עריכה)
+      // One - My Projects Management Section
       section#one.wrapper.style2.fade-up
         .inner
-          h2.major עריכת פרויקטים דינמיים
-          p שנה את ערכי השדות ישירות בתוך התיבות ולחץ על כפתור השמירה כדי לעדכן את MongoDB.
+          h2.major Dynamic Project Management
+          p Modify field values directly within the form components and click save to dispatch data streams to MongoDB.
 
           .row.row-cols-1.row-cols-md-3.g-4.mt-4
             if projects
               each project in projects
                 .col
-                  //- הוספת מזהה הפרויקט כעוגן עבור ה-JavaScript
+                  //- Dynamic project document binding for client-side JavaScript execution
                   .card.h-100.shadow-sm(data-project-id=project._id style="background: #ffffff; border: 1px solid #cbd5e1;")
                     img.card-img-top(src=`/img/projects/${project.imageCover}`, alt=project.name)
 
                     .card-body
-                      //- שדה עריכת שם פרויקט
+                      //- Project Name Form Group
                       .mb-3
-                        label.form-label.fw-bold.text-muted(style="font-size: 0.75rem; text-transform: uppercase;") שם הפרויקט:
+                        label.form-label.fw-bold.text-muted(style="font-size: 0.75rem; text-transform: uppercase;") Project Name:
                         input.form-control.project-name-input(type="text" value=project.name style="color: #1e293b; font-weight: bold; border: 1px solid #94a3b8;")
 
-                      //- שדה עריכת תקציר הפרויקט
+                      //- Project Summary Form Group
                       .mb-3
-                        label.form-label.fw-bold.text-muted(style="font-size: 0.75rem; text-transform: uppercase;") תקציר (Summary):
+                        label.form-label.fw-bold.text-muted(style="font-size: 0.75rem; text-transform: uppercase;") Summary:
                         textarea.form-control.project-summary-input(rows="4" style="color: #334155; font-size: 0.9rem; border: 1px solid #94a3b8;")= project.summary
 
                       if project.tags
                         .mt-3.d-flex.flex-wrap.gap-1
                           each tag in project.tags
-                            span.badge.bg-secondary.me-1= tag
+                            span.badge.bg-secondary= tag
 
                     .card-footer.bg-transparent.border-top-0.pt-0
-                      //- כפתור שמירה ייעודי השולח את השינויים של הכרטיס הזה
-                      button.btn.btn-success.btn-sm.w-100.btn-save-project(type="button" style="font-weight: bold; background-color: #16a34a; border: none;") שמור שינויים 💾
+                      //- Save Trigger targeting administrative API routes
+                      button.btn.btn-success.btn-sm.w-100.btn-save-project(type="button" style="font-weight: bold; background-color: #16a34a; border: none;") Save Changes 💾
 
       // Three - Tours Project
       section#three.wrapper.style1.fade-up

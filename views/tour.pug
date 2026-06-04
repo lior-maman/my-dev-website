@@ -1,13 +1,15 @@
 doctype html
-html(lang="he", dir="rtl")
+html(lang="en" dir="ltr")
   head
     meta(charset="utf-8")
-    title= `${tour.name} | עולם הטיולים`
-    link(href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css", rel="stylesheet")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    title= `${tour.name} | Tour Marketplace`
+    link(href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet")
     style.
       .hero-section { 
         background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/img/tours/#{tour.imageCover}');
         background-size: cover;
+        background-position: center;
         height: 50vh;
         color: white;
         display: flex;
@@ -20,22 +22,26 @@ html(lang="he", dir="rtl")
     header.hero-section
       .text-center
         h1.display-2.fw-bold= tour.name
-        p.lead= `משך הטיול: ${tour.duration} ימים`
+        p.lead= `Duration: ${tour.duration} days`
 
     // Main Content
     main.container.my-5
       .row
+        // Left Column - About the Tour
         .col-md-8
-          h2 אודות הטיול
+          h2 About the Tour
           p.lead= tour.description
+
+        // Right Column - Sidebar Card
         .col-md-4
           .card.shadow-sm
             .card-body
-              h4 פרטים טכניים
+              h4 Tour Details
               ul.list-group.list-group-flush
-                li.list-group-item= `קושי: ${tour.difficulty}`
-                li.list-group-item= `מחיר: ${tour.price} ₪`
-                li.list-group-item= `קבוצה: עד ${tour.maxGroupSize} אנשים`
-              button.btn.btn-primary.w-100.mt-3 הזמן עכשיו
+                li.list-group-item= `Difficulty: ${tour.difficulty}`
+                li.list-group-item= `Price: $${tour.price}`
+                li.list-group-item= `Group Size: Max ${tour.maxGroupSize} people`
+
+              a.btn.btn-primary.w-100.mt-3(href="#book-now") Book Now ↗
 
     script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js")
