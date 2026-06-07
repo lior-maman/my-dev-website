@@ -127,11 +127,11 @@ export const handleContactForm = async (req, res) => {
   }
 
   const mailOptions = {
-    from: process.env.EMAIL_USER, // המייל שלך שולח
-    to: process.env.EMAIL_USER, // המייל שלך גם מקבל (התראה לעצמך)
-    replyTo: email, // כשתלחץ "השב" במייל, זה יופנה אוטומטית למייל של הלקוח
-    subject: `💼 New Portfolio Message from ${name}`,
-    text: `You received a new message from your contact form:\n\nName: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
+    from: process.env.EMAIL_USER,
+    to: process.env.EMAIL_USER,
+    replyTo: email,
+    subject: `New Portfolio Message from ${name}`,
+    text: `You received a new message from your contact form:\n\nName: ${name}\nEmail: ${email}\nMessage: ${message}`,
   };
 
   try {
