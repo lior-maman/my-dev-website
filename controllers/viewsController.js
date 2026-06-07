@@ -1,4 +1,6 @@
 // 1. ייבוא של המודל החדש (בנוסף ל-Tour הקיים בשורה 1)
+// eslint-disable-next-line import/no-extraneous-dependencies
+import nodemailer from 'nodemailer';
 import Tour from '../models/tourModel.js';
 import Project from '../models/projectModel.js';
 
@@ -101,6 +103,49 @@ export const getTour = async (req, res, next) => {
     });
   } catch (err) {
     res.status(500).json({ status: 'error', message: err.message });
+  }
+};
+
+// הגדרת המנוע ששולח את המייל באמצעות משתני הסביבה המוגנים
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
+  },
+});
+
+// פונקציית הטיפול בטופס
+export const handleContactForm = async (req, res) => {
+  const { name, email, message } = req.body;
+
+  // ודא שהשדות לא ריקים
+  if (!name || !email || !message) {
+    return res
+      .status(400)
+      .json({ status: 'error', message: 'All fields are required.' });
+  }
+
+  const mailOptions = {
+    from: process.env.EMAIL_USER, // המייל שלך שולח
+    to: process.env.EMAIL_USER, // המייל שלך גם מקבל (התראה לעצמך)
+    replyTo: email, // כשתלחץ "השב" במייל, זה יופנה אוטומטית למייל של הלקוח
+    subject: `💼 New Portfolio Message from ${name}`,
+    text: `You received a new message from your contact form:\n\nName: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
+  };
+
+  try {
+    await transporter.sendMail(mailOptions);
+    res.status(200).json({
+      status: 'success',
+      message: 'Your message has been sent successfully!',
+    });
+  } catch (error) {
+    console.error('Email sending error:', error);
+    res.status(500).json({
+      status: 'error',
+      message: 'Failed to send message. Please try again later.',
+    });
   }
 };
 

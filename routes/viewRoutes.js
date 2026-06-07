@@ -5,6 +5,7 @@ import {
   getProject,
   getEditPage,
   updateProject,
+  handleContactForm,
 } from '../controllers/viewsController.js';
 
 const router = express.Router();
@@ -18,5 +19,5 @@ router.get('/privacy', (req, res) => {
 });
 router.get('/edit', getEditPage);
 router.patch('/api/v1/projects/:id', updateProject);
-
+router.post('/api/v1/contact', handleContactForm);
 export default router;

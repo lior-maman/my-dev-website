@@ -14,11 +14,12 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 
 // 1) MIDDLEWARES
+
+app.use(express.json());
+
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
-
-app.use(express.json());
 
 app.use(express.static(path.join(__dirname, 'public'))); // הגדרת תיקיית פאבליק
 //2) MIDDLEWARES
