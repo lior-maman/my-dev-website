@@ -12,8 +12,9 @@ const router = express.Router();
 
 router.get('/', getOverview);
 
-router.get('/tour/:slug', getTour);
 router.get('/project/:slug', getProject);
+router.get('/tour/:slug', getTour);
+
 router.get('/privacy', (req, res) => {
   res.render('privacy-policy');
 });
