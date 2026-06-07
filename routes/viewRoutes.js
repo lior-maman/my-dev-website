@@ -17,6 +17,10 @@ router.get('/project/:slug', getProject);
 router.get('/privacy', (req, res) => {
   res.render('privacy-policy');
 });
+router.get('/contact', (req, res) => {
+  res.render('contact');
+});
+
 router.get('/edit', getEditPage);
 router.patch('/api/v1/projects/:id', updateProject);
 router.post('/api/v1/contact', handleContactForm);
