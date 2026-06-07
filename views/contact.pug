@@ -47,9 +47,8 @@ html(lang="en")
 
         // סקריפט גלובלי יציב לביצוע ה-Fetch
         script.
-            async function sendContactForm(e) {
-                e.preventDefault();
-                e.stopPropagation();
+            async function sendContactForm() {
+
 
                 document.getElementById('successAlert').style.display = 'none';
                 document.getElementById('errorAlert').style.display = 'none';
