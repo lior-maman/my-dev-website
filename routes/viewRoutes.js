@@ -13,7 +13,9 @@ router.get('/', getOverview);
 
 router.get('/tour/:slug', getTour);
 router.get('/project/:slug', getProject);
-// משאירים אותו נקי כרגע כדי שהדף ייפתח חופשי
+router.get('/privacy', (req, res) => {
+  res.render('privacy-policy');
+});
 router.get('/edit', getEditPage);
 router.patch('/api/v1/projects/:id', updateProject);
 
