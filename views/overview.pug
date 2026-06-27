@@ -3,7 +3,7 @@ html(lang="en" dir="ltr")
   head
     meta(charset="utf-8")
     meta(name="viewport" content="width=device-width, initial-scale=1, user-scalable=no")
-    title Lior Maman | Full-Stack Developer
+    title Lior Maman | AI Application Builder | Full-Stack Developer
 
     // Main CSS
     link(rel="stylesheet" href="/assets/css/main.css")
@@ -17,7 +17,7 @@ html(lang="en" dir="ltr")
 
     nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.fixed-top
       .container-fluid
-        a.navbar-brand.fw-bold(href="#intro") LM
+        //a.navbar-brand(href="/") Lior Maman
 
         button.navbar-toggler(type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation")
           span.navbar-toggler-icon
@@ -31,7 +31,7 @@ html(lang="en" dir="ltr")
             li.nav-item
               a.nav-link.scrolly(href="#one" class=(path === '#one' ? 'active' : '')) Projects
             li.nav-item
-              a.nav-link.scrolly(href="#three" class=(path === '#three' ? 'active' : '')) Tours Project
+              a.nav-link.scrolly(href="#three" class=(path === '#three' ? 'active' : '')) MongoDB Project
 
     #wrapper
       // Intro Section
@@ -80,6 +80,8 @@ html(lang="en" dir="ltr")
               i.fas.fa-terminal.tech-icon
               span Command Line
 
+
+
           .text-center.mt-5
             a.button.scrolly(href="#one") See My Projects
 
@@ -108,7 +110,7 @@ html(lang="en" dir="ltr")
                       .d-flex.justify-content-between.align-items-center
                         a.btn.btn-outline-primary.btn-sm.w-100(href=`/project/${project.slug}`) View Details
 
-      // Three - Tours Project
+      // Three - MongoDB Project
       section#three.wrapper.style1.fade-up
         .inner
           h2.major Our Featured Tours
