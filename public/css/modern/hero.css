@@ -4,7 +4,7 @@
 
 .hero {
 
-    min-height: 100vh;
+    min-height: 80vh;
 
     display: flex;
 
@@ -19,6 +19,8 @@
     text-align: center;
 
     padding-inline: 1.5rem;
+
+    padding-top: 100px;
 
 }
 
@@ -247,11 +249,5 @@
 
             
     }
-
-}
-
-.hero {
-
-    padding-top: 100px;
 
 }
