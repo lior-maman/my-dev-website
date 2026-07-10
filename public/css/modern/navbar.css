@@ -1,0 +1,150 @@
+/* ==========================================================
+   Navbar
+   ========================================================== */
+
+.navbar {
+
+    position: sticky;
+    top: 0;
+
+    z-index: var(--z-navbar);
+
+    min-height: var(--navbar-height);
+
+    background: var(--glass-bg);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    border-bottom: 1px solid var(--glass-border);
+
+    transition: var(--transition-normal);
+}
+
+/* ==========================================================
+   Container
+   ========================================================== */
+
+.navbar .container,
+.navbar .container-fluid,
+.navbar .container-modern {
+
+    min-height: var(--navbar-height);
+
+    display: flex;
+    align-items: center;
+}
+
+/* ==========================================================
+   Brand
+   ========================================================== */
+
+.navbar-brand {
+
+    font-family: "Space Grotesk", sans-serif;
+
+    font-weight: 700;
+
+    letter-spacing: -.02em;
+
+    color: var(--text-primary) !important;
+}
+
+/* ==========================================================
+   Links
+   ========================================================== */
+
+.navbar-nav .nav-link {
+
+    color: var(--text-secondary);
+
+    font-weight: 500;
+
+    position: relative;
+
+    transition: var(--transition-fast);
+
+    padding-inline: 1rem !important;
+}
+
+.navbar-nav .nav-link:hover {
+
+    color: var(--text-primary);
+}
+
+/* ==========================================================
+   Active Link Indicator
+   ========================================================== */
+
+.navbar-nav .nav-link::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    bottom: -4px;
+
+    width: 0;
+
+    height: 2px;
+
+    background: var(--color-primary);
+
+    transform: translateX(-50%);
+
+    transition: var(--transition-fast);
+}
+
+.navbar-nav .nav-link:hover::after,
+.navbar-nav .nav-link.active::after {
+
+    width: 70%;
+}
+
+.navbar-nav .nav-link.active {
+
+    color: var(--text-primary);
+}
+
+/* ==========================================================
+   Theme Button
+   ========================================================== */
+
+#themeToggle {
+
+    min-width: 44px;
+}
+
+/* ==========================================================
+   Mobile Menu
+   ========================================================== */
+
+.navbar-toggler {
+
+    border: 1px solid var(--border-color);
+
+    padding: .5rem .75rem;
+}
+
+.navbar-toggler:focus {
+
+    box-shadow: none;
+}
+
+/* ==========================================================
+   Collapsed Menu
+   ========================================================== */
+
+.navbar-collapse {
+
+    margin-top: .75rem;
+}
+
+@media (min-width: 992px) {
+
+    .navbar-collapse {
+
+        margin-top: 0;
+    }
+}

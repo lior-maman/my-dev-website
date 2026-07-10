@@ -1,0 +1,43 @@
+nav.navbar.navbar-expand-lg.fixed-top
+    .container-modern
+
+        a.navbar-brand(href="/")
+            | LIOR MAMAN
+
+        button.navbar-toggler(
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+        )
+            span.navbar-toggler-icon
+
+        #navbarNav.collapse.navbar-collapse.justify-content-start.ms-lg-5
+
+            ul.navbar-nav.align-items-lg-center.gap-lg-2.w-100
+
+                li.nav-item
+                    a.nav-link(href="#intro") Home
+
+                li.nav-item
+                    a.nav-link(href="#tech") Tech Stack
+
+                li.nav-item
+                    a.nav-link(href="#projects") Projects
+
+                li.nav-item
+                    a.nav-link(href="#tours") MongoDB Project
+
+                li.nav-item.ms-lg-auto.me-lg-2
+                    button#themeToggle.btn-modern.btn-secondary-modern(
+                        type="button"
+                        aria-label="Toggle theme"
+                    )
+                        i.bi.bi-moon-stars
+
+                li.nav-item
+                    a.btn-modern.btn-primary-modern(href="/contact")
+                        i.bi.bi-envelope
+                        span Contact

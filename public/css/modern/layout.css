@@ -1,0 +1,152 @@
+/* ==========================================================
+   Global Layout
+   ========================================================== */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    min-height: 100%;
+}
+
+body {
+    background:
+        radial-gradient(circle at top right,
+            rgba(59,130,246,.08),
+            transparent 35%),
+
+        radial-gradient(circle at bottom left,
+            rgba(139,92,246,.08),
+            transparent 40%),
+
+        var(--bg-page);
+
+    overflow-x: hidden;
+}
+
+/* ==========================================================
+   Main App
+   ========================================================== */
+
+#app {
+    position: relative;
+    min-height: 100vh;
+}
+
+/* ==========================================================
+   Containers
+   ========================================================== */
+
+.container-modern {
+
+    width: min(100% - 2rem, var(--container-width));
+
+    margin-inline: auto;
+
+}
+
+/* ==========================================================
+   Sections
+   ========================================================== */
+
+.section {
+
+    padding-block: var(--space-xl);
+
+    position: relative;
+
+}
+
+.section-sm {
+
+    padding-block: var(--space-lg);
+
+}
+
+.section-lg {
+
+    padding-block: 9rem;
+
+}
+
+/* ==========================================================
+   Glass Surface
+   ========================================================== */
+
+.surface {
+
+    background: var(--glass-bg);
+
+    backdrop-filter: var(--glass-blur);
+
+    border: 1px solid var(--glass-border);
+
+    border-radius: var(--radius-lg);
+
+}
+
+/* ==========================================================
+   Cards
+   ========================================================== */
+
+.card-modern {
+
+    background: var(--bg-card);
+
+    border: 1px solid var(--border-color);
+
+    border-radius: var(--radius-lg);
+
+    box-shadow: var(--shadow-md);
+
+    transition: var(--transition-normal);
+
+    overflow: hidden;
+
+}
+
+.card-modern:hover {
+
+    transform: translateY(-8px);
+
+    box-shadow: var(--shadow-lg);
+
+}
+
+/* ==========================================================
+   Images
+   ========================================================== */
+
+img {
+
+    max-width: 100%;
+
+    display: block;
+
+}
+
+/* ==========================================================
+   Utilities
+   ========================================================== */
+
+.text-muted-modern {
+
+    color: var(--text-muted);
+
+}
+
+.border-modern {
+
+    border: 1px solid var(--border-color);
+
+}
+
+.rounded-modern {
+
+    border-radius: var(--radius-lg);
+
+}

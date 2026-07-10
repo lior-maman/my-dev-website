@@ -1,0 +1,163 @@
+/* ==========================================================
+   Modern Cards
+   ========================================================== */
+
+.card-modern {
+
+    background: var(--bg-card);
+
+    border: 1px solid var(--border-color);
+
+    border-radius: var(--radius-lg);
+
+    overflow: hidden;
+
+    transition: var(--transition-normal);
+
+    box-shadow: var(--shadow-md);
+
+    height: 100%;
+
+}
+
+.card-modern:hover {
+
+    transform: translateY(-8px);
+
+    box-shadow: var(--shadow-lg);
+
+    border-color: rgba(59,130,246,.35);
+
+}
+
+/* ==========================================================
+   Image
+   ========================================================== */
+
+.card-modern img {
+
+    width: 100%;
+
+    aspect-ratio: 16 / 9;
+
+    object-fit: cover;
+
+}
+
+/* ==========================================================
+   Body
+   ========================================================== */
+
+.card-modern-body {
+
+    padding: 1.5rem;
+
+}
+
+/* ==========================================================
+   Title
+   ========================================================== */
+
+.card-modern-title {
+
+    font-size: 1.3rem;
+
+    font-weight: 700;
+
+    margin-bottom: .75rem;
+
+    color: var(--text-primary);
+
+}
+
+/* ==========================================================
+   Description
+   ========================================================== */
+
+.card-modern-description {
+
+    color: var(--text-secondary);
+
+    font-size: .95rem;
+
+    line-height: 1.7;
+
+    margin-bottom: 1rem;
+
+}
+
+/* ==========================================================
+   Tags
+   ========================================================== */
+
+.card-tags {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: .5rem;
+
+}
+
+.card-tag {
+
+    padding: .45rem .8rem;
+
+    border-radius: 999px;
+
+    background: rgba(255,255,255,.05);
+
+    border: 1px solid rgba(255,255,255,.08);
+
+    color: var(--text-muted);
+
+    font-size: .8rem;
+
+}
+
+/* ==========================================================
+   Footer
+   ========================================================== */
+
+.card-modern-footer {
+
+    padding: 0 1.5rem 1.5rem;
+
+}
+
+/* ==========================================================
+   Featured Card
+   ========================================================== */
+
+.card-featured {
+
+    position: relative;
+
+}
+
+.card-featured::before {
+
+    content: "Featured";
+
+    position: absolute;
+
+    top: 1rem;
+
+    right: 1rem;
+
+    z-index: 2;
+
+    background: var(--color-primary);
+
+    color: white;
+
+    padding: .4rem .8rem;
+
+    border-radius: 999px;
+
+    font-size: .75rem;
+
+    font-weight: 600;
+
+}

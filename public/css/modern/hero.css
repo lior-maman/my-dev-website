@@ -1,0 +1,257 @@
+/* ==========================================================
+   Hero Section
+   ========================================================== */
+
+.hero {
+
+    min-height: 100vh;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    position: relative;
+
+    overflow: hidden;
+
+    text-align: center;
+
+    padding-inline: 1.5rem;
+
+}
+
+/* ==========================================================
+   Animated Background
+   ========================================================== */
+
+.hero::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(59,130,246,.18),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            circle at 80% 30%,
+            rgba(139,92,246,.18),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            circle at 50% 80%,
+            rgba(6,182,212,.14),
+            transparent 35%
+        );
+
+    z-index: 0;
+
+}
+
+/* ==========================================================
+   Hero Content
+   ========================================================== */
+
+.hero-content {
+
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 1100;
+
+}
+
+.hero-eyebrow {
+
+    display: inline-block;
+
+    padding: .45rem 1rem;
+
+    margin-bottom: 1.5rem;
+
+    border-radius: 999px;
+
+    background: rgba(255,255,255,.04);
+
+    border: 1px solid rgba(255,255,255,.08);
+
+    color: var(--color-primary);
+
+    font-size: .9rem;
+
+    font-weight: 600;
+
+}
+
+/* ==========================================================
+   Hero Title
+   ========================================================== */
+
+.hero-title {
+
+    margin-bottom: 1.5rem;
+
+    font-weight: 800;
+
+    line-height: .95;
+
+}
+
+.hero-title-gradient {
+
+    background: linear-gradient(
+        90deg,
+        #3b82f6,
+        #06b6d4,
+        #8b5cf6
+    );
+
+    -webkit-background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+
+    background-clip: text;
+
+}
+
+/* ==========================================================
+   Hero Description
+   ========================================================== */
+
+.hero-description {
+
+    font-size: 1.2rem;
+
+    max-width: 700px;
+
+    margin-inline: auto;
+
+    margin-bottom: 2.5rem;
+
+    color: var(--text-secondary);
+
+}
+
+/* ==========================================================
+   CTA Buttons
+   ========================================================== */
+
+.hero-actions {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 1rem;
+
+    flex-wrap: wrap;
+
+}
+
+/* ==========================================================
+   Tech Badges
+   ========================================================== */
+
+.hero-tech {
+
+    margin-top: 3rem;
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: .75rem;
+
+    flex-wrap: wrap;
+
+}
+
+.hero-tech span {
+
+    padding: .65rem 1rem;
+
+    border-radius: 999px;
+
+    background: rgba(255,255,255,.04);
+
+    border: 1px solid rgba(255,255,255,.08);
+
+    color: var(--text-secondary);
+
+    font-size: .9rem;
+
+}
+
+/* ==========================================================
+   Scroll Indicator
+   ========================================================== */
+
+.scroll-indicator {
+
+    position: absolute;
+
+    bottom: 2rem;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    color: var(--text-muted);
+
+    font-size: .9rem;
+
+    opacity: .7;
+
+    animation: floatDown 2s infinite;
+
+}
+
+/* ==========================================================
+   Animation
+   ========================================================== */
+
+@keyframes floatDown {
+
+    0% {
+
+        transform:
+            translateX(-50%)
+            translateY(0);
+
+    }
+
+    50% {
+
+        transform:
+            translateX(-50%)
+            translateY(10px);
+
+    }
+
+    100% {
+
+        transform:
+            translateX(-50%)
+            translateY(0);
+
+
+            
+    }
+
+}
+
+.hero {
+
+    padding-top: 100px;
+
+}
