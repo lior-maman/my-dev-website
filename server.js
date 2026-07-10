@@ -2,19 +2,30 @@ import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import app from './app.js';
 
-// הגדרת משתנה סביבה לנתיב קובץ ההגדרות
+// Load environment variables
 dotenv.config({ path: './config.env' });
 
-//חיבור למסד נתונים
 const DB = process.env.Database_URL;
 
-mongoose.connect(DB).then(() => {
-  console.log('DB connection successful!');
-});
+if (!DB) {
+  console.error('❌ Database_URL environment variable is missing');
+  process.exit(1);
+}
 
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => {
-  // eslint-disable-next-line no-console
-  console.log(`App running on port ${PORT}...`);
-});
+// Connect to MongoDB first
+mongoose
+  .connect(DB)
+  .then(() => {
+    console.log('✅ DB connection successful!');
+
+    app.listen(PORT, () => {
+      console.log(`🚀 App running on port ${PORT}...`);
+    });
+  })
+  .catch((err) => {
+    console.error('❌ Database connection failed');
+    console.error(err.message);
+    process.exit(1);
+  });
