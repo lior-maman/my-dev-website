@@ -22,7 +22,7 @@ block content
           i.bi.bi-grid
           span Explore Projects
 
-        a.btn-modern.btn-secondary-modern(href="/contact")
+        a.btn-modern.btn-secondary-modern(href="#contact")
           i.bi.bi-envelope
           span Contact
 
@@ -169,3 +169,50 @@ block content
                       href=`/tour/${tour.slug}`
                     )
                       span Details
+
+
+  // Contact
+  section.section#contact
+
+    .container-modern
+
+      .surface.p-5
+
+        h2.text-center.mb-3 Get In Touch
+
+        p.text-center.text-muted-modern.mb-5
+          | Feel free to reach out for collaborations,
+          | consulting opportunities or full-time roles.
+
+        form#contactForm
+
+          .mb-3
+            label.form-label(for="name") Full Name
+            input#name.form-control.form-control-lg(
+              type="text"
+              placeholder="John Doe"
+              required
+            )
+
+          .mb-3
+            label.form-label(for="email") Email Address
+            input#email.form-control.form-control-lg(
+              type="email"
+              placeholder="name@example.com"
+              required
+            )
+
+          .mb-3
+            label.form-label(for="message") Message
+            textarea#message.form-control(
+              rows="5"
+              placeholder="Tell me about your project..."
+              required
+            )
+
+          .text-center.mt-4
+            button.btn-modern.btn-primary-modern(
+              type="submit"
+            )
+              i.bi.bi-send
+              span Send Message
