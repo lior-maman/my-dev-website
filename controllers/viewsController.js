@@ -106,43 +106,50 @@ export const getTour = async (req, res, next) => {
   }
 };
 
-// הגדרת המנוע ששולח את המייל באמצעות משתני הסביבה המוגנים
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-});
-
-// פונקציית הטיפול בטופס
 export const handleContactForm = async (req, res) => {
   const { name, email, message } = req.body;
 
-  // ודא שהשדות לא ריקים
   if (!name || !email || !message) {
-    return res
-      .status(400)
-      .json({ status: 'error', message: 'All fields are required.' });
+    return res.status(400).json({
+      status: 'error',
+      message: 'All fields are required.',
+    });
   }
 
-  const mailOptions = {
-    from: process.env.EMAIL_USER,
-    to: process.env.EMAIL_USER,
-    replyTo: email,
-    subject: `New Portfolio Message from ${name}`,
-    text: `You received a new message from your contact form:\n\nName: ${name}\nEmail: ${email}\nMessage: ${message}`,
-  };
-
   try {
+    const transporter = nodemailer.createTransport({
+      host: 'smtp.gmail.com',
+      port: 465,
+      secure: true,
+      auth: {
+        user: process.env.EMAIL_USER.trim(),
+        pass: process.env.EMAIL_PASS.trim(),
+      },
+    });
+
+    const mailOptions = {
+      from: process.env.EMAIL_USER,
+      to: process.env.EMAIL_USER,
+      replyTo: email,
+      subject: `New Portfolio Message from ${name}`,
+      text: `
+Name: ${name}
+Email: ${email}
+
+${message}
+      `,
+    };
+
     await transporter.sendMail(mailOptions);
-    res.status(200).json({
+
+    return res.status(200).json({
       status: 'success',
       message: 'Your message has been sent successfully!',
     });
   } catch (error) {
     console.error('Email sending error:', error);
-    res.status(500).json({
+
+    return res.status(500).json({
       status: 'error',
       message: 'Failed to send message. Please try again later.',
     });
