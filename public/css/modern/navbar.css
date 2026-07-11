@@ -117,7 +117,7 @@
 }
 
 /* ==========================================================
-   Mobile Menu
+   Mobile Menu Button
    ========================================================== */
 
 .navbar-toggler {
@@ -133,7 +133,7 @@
 }
 
 /* ==========================================================
-   Collapsed Menu
+   Desktop
    ========================================================== */
 
 .navbar-collapse {
@@ -146,5 +146,77 @@
     .navbar-collapse {
 
         margin-top: 0;
+    }
+}
+
+/* ==========================================================
+   Mobile Navigation
+   ========================================================== */
+
+@media (max-width: 991px) {
+
+    .navbar-collapse {
+
+        position: absolute;
+
+        top: calc(100% + 12px);
+
+        left: 50%;
+
+        right: auto;
+
+        transform: translateX(-50%);
+
+        width: min(90vw, 560px);
+
+        padding: 1.5rem;
+
+        border-radius: 1rem;
+
+        background: var(--glass-bg);
+
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+
+        border: 1px solid var(--glass-border);
+
+        z-index: 9999;
+
+        margin-top: 0;
+    }
+
+    .navbar-collapse:not(.show) {
+
+        display: none;
+    }
+
+    .navbar-nav {
+
+        gap: .5rem;
+    }
+
+    .navbar-nav .nav-link {
+
+        padding: .85rem 0 !important;
+
+        font-size: 1.05rem;
+    }
+
+    .navbar-brand {
+
+        font-size: 1.25rem;
+    }
+
+    #themeToggle {
+
+        width: 48px;
+        height: 48px;
+    }
+
+    .navbar-nav .btn-primary-modern {
+
+        width: 100%;
+
+        justify-content: center;
     }
 }
