@@ -7,15 +7,15 @@ block content
 
     .hero-content
 
-      span.hero-eyebrow Portfolio + Live Projects
+      span.hero-eyebrow Financial Intelligence Platform
 
       h1.hero-title
-        | Designing how people learn.
+        | Building intelligent systems.
         br
-        span.hero-title-gradient Building the systems behind it.
+        span.hero-title-gradient Turning data into insights.
 
       p.hero-description
-        | Instructional Designer • Full Stack Developer • AI Builder
+        | Full Stack Developer • Financial Technology • AI 
 
       .hero-actions
         a.btn-modern.btn-primary-modern.btn-glow(href="#projects")
@@ -31,8 +31,8 @@ block content
         span MongoDB
         span Express
         span Mongoose 
-        span Artificial intelligence
-        span Learning Design
+        span REST APIs
+        span Analytics
 
     .scroll-indicator
       i.bi.bi-arrow-down
@@ -74,18 +74,18 @@ block content
                         span.card-tag= tag
 
                 .card-modern-footer
-
+                  p= project.buttonText 
                   a.btn-modern.btn-outline-modern.w-100(
                     href=`/project/${project.slug}`
                   )
-                    span View Project
+                    span= project.buttonText
 
   // Tours Project
   section.section#tours
 
     .container-modern
 
-      h2.text-center.mb-3 Live Database Project
+      h2.text-center.mb-3 Company Intelligence Database
 
       p.text-center.text-muted-modern.mb-5
         | Dynamic content delivered directly from MongoDB.

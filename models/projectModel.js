@@ -28,6 +28,10 @@ const projectSchema = new mongoose.Schema({
     type: [String], // מערך של מחרוזות עבור הטכנולוגיות (למשל: ['Node.js', 'Express', 'Pug'])
     required: [true, 'פרויקט חייב להכיל לפחות תגית טכנולוגית אחת'],
   },
+  buttonText: {
+    type: String,
+    default: 'View Project',
+  },
   imageCover: {
     type: String,
     default: 'default-project.jpg', // ערך ברירת מחדל אם אין תמונה לכל פרויקט
