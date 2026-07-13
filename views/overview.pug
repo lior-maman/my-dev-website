@@ -20,7 +20,7 @@ block content
       .hero-actions
         a.btn-modern.btn-primary-modern.btn-glow(href="#projects")
           i.bi.bi-grid
-          span Explore Projects
+          span Explore Platform
 
         a.btn-modern.btn-secondary-modern(href="#contact")
           i.bi.bi-envelope
@@ -30,68 +30,20 @@ block content
         span Node.js
         span MongoDB
         span Express
-        span React
-        span AI
+        span Mongoose 
+        span Artificial intelligence
         span Learning Design
 
     .scroll-indicator
       i.bi.bi-arrow-down
 
-  // About
-  section.section
-    .container-modern
-
-      .surface.p-5.text-center
-
-        h2.mb-4 About
-
-        p.mx-auto(style="max-width:800px")
-          | I design learning experiences and build the systems that support them.
-          | My work combines instructional design, software development,
-          | data-driven thinking and modern web technologies.
-
-  // Tech Stack
-  section.section#tech
-
-    .container-modern
-
-      h2.text-center.mb-5 Tech Stack
-
-      .row.g-4
-
-        .col-md-4
-          .card-modern
-            .card-modern-body.text-center
-              i.bi.bi-cpu.fs-1.mb-3
-              h3.card-modern-title Backend
-              p.card-modern-description
-                | Node.js, Express, REST APIs,
-                | MongoDB and server-side architecture.
-
-        .col-md-4
-          .card-modern
-            .card-modern-body.text-center
-              i.bi.bi-window.fs-1.mb-3
-              h3.card-modern-title Frontend
-              p.card-modern-description
-                | HTML5, CSS3, Bootstrap,
-                | Pug and responsive interfaces.
-
-        .col-md-4
-          .card-modern
-            .card-modern-body.text-center
-              i.bi.bi-robot.fs-1.mb-3
-              h3.card-modern-title AI & Learning
-              p.card-modern-description
-                | Instructional design,
-                | learning systems and AI-powered workflows.
 
   // Projects
   section.section#projects
 
     .container-modern
 
-      h2.text-center.mb-3 Featured Projects
+      h2.text-center.mb-3 Financial Intelligence Platform
 
       p.text-center.text-muted-modern.mb-5
         | Real applications built with modern web technologies.
@@ -169,63 +121,43 @@ block content
                       href=`/tour/${tour.slug}`
                     )
                       span Details
-  // Contact
-  section.section#contact
+
+
+  // Tech Stack
+  section.section#tech
 
     .container-modern
 
-      .surface.p-5
+      h2.text-center.mb-5 Tech Stack
 
-        h2.text-center.mb-3 Get In Touch
+      .row.g-4
 
-        p.text-center.text-muted-modern.mb-5
-          | Feel free to reach out for collaborations,
-          | consulting opportunities or full-time roles.
+        .col-md-4
+          .card-modern
+            .card-modern-body.text-center
+              i.bi.bi-cpu.fs-1.mb-3
+              h3.card-modern-title Backend
+              p.card-modern-description
+                | Node.js, Express, REST APIs,
+                | MongoDB and server-side architecture.
 
-        form#contactForm
+        .col-md-4
+          .card-modern
+            .card-modern-body.text-center
+              i.bi.bi-window.fs-1.mb-3
+              h3.card-modern-title Frontend
+              p.card-modern-description
+                | HTML5, CSS3, Bootstrap,
+                | Pug and responsive interfaces.
 
-          .mb-3
-            label.form-label(for="name") Full Name
-            input#name.form-control.form-control-lg(
-              type="text"
-              placeholder="John Doe"
-              required
-            )
-
-          .mb-3
-            label.form-label(for="email") Email Address
-            input#email.form-control.form-control-lg(
-              type="email"
-              placeholder="name@example.com"
-              required
-            )
-
-          .mb-3
-            label.form-label(for="message") Message
-            textarea#message.form-control(
-              rows="5"
-              placeholder="Tell me about your project..."
-              required
-            )
-
-          .text-center.mt-4
-            button.btn-modern.btn-primary-modern(
-              type="submit"
-            )
-              i.bi.bi-send
-              span Send Message
-
-        #successAlert.alert.alert-success.mt-4(
-          role="alert"
-          style="display:none;"
-        )
-          | Your message has been sent successfully!
-
-        #errorAlert.alert.alert-danger.mt-4(
-          role="alert"
-          style="display:none;"
-        )
-          | Something went wrong. Please try again.
+        .col-md-4
+          .card-modern
+            .card-modern-body.text-center
+              i.bi.bi-robot.fs-1.mb-3
+              h3.card-modern-title AI & Learning
+              p.card-modern-description
+                | Instructional design,
+                | learning systems and AI-powered workflows.
 
 
 block scripts
