@@ -56,3 +56,61 @@ footer.section-sm.mt-5
             hr.my-4
             .text-center.text-muted-modern
                 small © #{new Date().getFullYear()} Lior Maman. All rights reserved.
+
+
+
+block scripts
+
+    script.
+
+        async function sendContactForm(event) {
+
+            event.preventDefault();
+
+            document.getElementById('successAlert').style.display = 'none';
+            document.getElementById('errorAlert').style.display = 'none';
+
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                message: document.getElementById('message').value
+            };
+
+            try {
+
+                const response = await fetch('/api/v1/contact', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const result = await response.json();
+
+                if (response.ok && result.status === 'success') {
+
+                    document.getElementById('successAlert').style.display = 'block';
+                    document.getElementById('contactForm').reset();
+
+                } else {
+
+                    document.getElementById('errorAlert').style.display = 'block';
+                }
+
+            } catch (error) {
+
+                console.error(error);
+
+                document.getElementById('errorAlert').style.display = 'block';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const form = document.getElementById('contactForm');
+
+            if (!form) return;
+
+            form.addEventListener('submit', sendContactForm);
+        });
