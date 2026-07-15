@@ -1,64 +1,63 @@
-section.section#contact
+section.section#footer
+    footer.section-sm.mt-5
+        .container-modern
 
-footer.section-sm.mt-5
-    .container-modern
-        // Contact Section (Inside Footer)
-        .surface.p-5.mb-4
-            h2.text-center.mb-3 Contact
+            .surface.p-5.mb-4
+                h2.text-center.mb-3 Contact
 
-            p.text-center.text-muted-modern.mb-5
-                | Have a question, collaborations, opportunity,
-                | or feedback? i'd love to hear from you.
+                p.text-center.text-muted-modern.mb-5
+                    | Have a question, collaborations, opportunity,
+                    | or feedback? i'd love to hear from you.
 
-            form#contactForm
-                .mb-3
-                    label.form-label(for="name") Full Name
-                    input#name.form-control.form-control-lg(type="text" placeholder="Name", required)
+                form#contactForm
+                    .mb-3
+                        label.form-label(for="name") Full Name
+                        input#name.form-control.form-control-lg(type="text" placeholder="Name", required)
 
-                .mb-3
-                    label.form-label(for="email") Email Address
-                    input#email.form-control.form-control-lg(type="email" placeholder="Email", required)
+                    .mb-3
+                        label.form-label(for="email") Email Address
+                        input#email.form-control.form-control-lg(type="email" placeholder="Email", required)
 
-                .mb-3
-                    label.form-label(for="message") Message
-                    textarea#message.form-control(rows="5" placeholder="Message", required)
+                    .mb-3
+                        label.form-label(for="message") Message
+                        textarea#message.form-control(rows="5" placeholder="Message", required)
 
-                .text-center.mt-4
-                    button.btn-modern.btn-primary-modern(type="submit")
-                        i.bi.bi-send.me-2
-                        | Send Message
+                    .text-center.mt-4
+                        button.btn-modern.btn-primary-modern(type="submit")
+                            i.bi.bi-send.me-2
+                            | Send Message
 
-            #successAlert.alert.alert-success.mt-4(role="alert" style="display:none;")
-                | Your message has been sent successfully!
+                #successAlert.alert.alert-success.mt-4(role="alert" style="display:none;")
+                    | Your message has been sent successfully!
 
-            #errorAlert.alert.alert-danger.mt-4(role="alert" style="display:none;")
-                | Something went wrong. Please try again.
+                #errorAlert.alert.alert-danger.mt-4(role="alert" style="display:none;")
+                    | Something went wrong. Please try again.
 
-        // Footer Content
-        .surface.p-4.p-md-5
-            .row.align-items-center
-                .col-md-6
-                    h4.mb-2 Lior Maman
-                    p.mb-0.text-muted-modern
-                        | Building intelligent systems.
-                        br
-                        | Turning data into insights.
+            // Footer Content
+            .surface.p-4.p-md-5
+                .row.align-items-center
+                    .col-md-6
+                        h4.mb-2 Lior Maman
+                        p.mb-0.text-muted-modern
+                            | Building intelligent systems.
+                            br
+                            | Turning data into insights.
 
-                .col-md-6.text-md-end.mt-4.mt-md-0
-                    .d-flex.flex-wrap.justify-content-md-end.gap-3
-                        a(href="/privacy")
-                            i.bi.bi-shield-check.me-2
-                            | Privacy Policy
-                        a(href="/terms")
-                            i.bi.bi-file-text.me-2
-                            | Terms of Use
-                        //a(href="/edit")
-                            i.bi.bi-gear.me-2
-                            | Admin
+                    .col-md-6.text-md-end.mt-4.mt-md-0
+                        .d-flex.flex-wrap.justify-content-md-end.gap-3
+                            a(href="/privacy")
+                                i.bi.bi-shield-check.me-2
+                                | Privacy Policy
+                            a(href="/terms")
+                                i.bi.bi-file-text.me-2
+                                | Terms of Use
+                            //a(href="/edit")
+                                i.bi.bi-gear.me-2
+                                | Admin
 
-            hr.my-4
-            .text-center.text-muted-modern
-                small © #{new Date().getFullYear()} Lior Maman. All rights reserved.
+                hr.my-4
+                .text-center.text-muted-modern
+                    small © #{new Date().getFullYear()} Lior Maman. All rights reserved.
 
 
 
