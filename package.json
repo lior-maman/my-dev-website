@@ -14,7 +14,6 @@
     "@fortawesome/fontawesome-free": "^7.2.0",
     "dotenv": "^17.4.2",
     "express": "^5.1.0",
-    "jquery": "^4.0.0",
     "mongodb": "^7.0.0",
     "mongoose": "^9.6.1",
     "morgan": "^1.10.1",

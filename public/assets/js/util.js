@@ -1,374 +1,187 @@
-(function ($) {
-  /**
-   * Generate an indented list of links from a nav. Meant for use with panel().
-   * @return {string} HTML string.
-   */
-  $.fn.navList = function () {
-    var $this = $(this),
-      $a = $this.find('a'),
-      b = [];
+(function () {
+  const prioritizedElements = new WeakMap();
 
-    $a.each(function () {
-      var $this = $(this),
-        indent = Math.max(0, $this.parents('li').length - 1),
-        href = $this.attr('href'),
-        target = $this.attr('target');
+  function toElements(elements) {
+    if (typeof elements === 'string') return Array.from(document.querySelectorAll(elements));
+    if (elements instanceof Element) return [elements];
+    return Array.from(elements || []);
+  }
 
-      b.push(
-        '<a ' +
-          'class="link depth-' +
-          indent +
-          '"' +
-          (typeof target !== 'undefined' && target != ''
-            ? ' target="' + target + '"'
-            : '') +
-          (typeof href !== 'undefined' && href != ''
-            ? ' href="' + href + '"'
-            : '') +
-          '>' +
-          '<span class="indent-' +
-          indent +
-          '"></span>' +
-          $this.text() +
-          '</a>',
-      );
-    });
+  function navList(nav) {
+    const element = nav instanceof Element ? nav : document.querySelector(nav);
+    if (!element) return '';
+    return Array.from(element.querySelectorAll('a'))
+      .map((link) => {
+        let indent = -1;
+        let parent = link.parentElement;
+        while (parent) {
+          if (parent.tagName === 'LI') indent += 1;
+          parent = parent.parentElement;
+        }
+        const target = link.getAttribute('target');
+        const href = link.getAttribute('href');
+        const targetAttribute = target ? ` target="${target}"` : '';
+        const hrefAttribute = href ? ` href="${href}"` : '';
+        return `<a class="link depth-${indent}"${targetAttribute}${hrefAttribute}><span class="indent-${indent}"></span>${link.textContent}</a>`;
+      })
+      .join('');
+  }
 
-    return b.join('');
-  };
-
-  /**
-   * Panel-ify an element.
-   * @param {object} userConfig User config.
-   * @return {jQuery} jQuery object.
-   */
-  $.fn.panel = function (userConfig) {
-    // No elements?
-    if (this.length == 0) return $(this);
-
-    // Multiple elements?
-    if (this.length > 1) {
-      for (var i = 0; i < this.length; i++) $(this[i]).panel(userConfig);
-
-      return $(this);
-    }
-
-    // Vars.
-    var $this = $(this),
-      $body = $('body'),
-      $window = $(window),
-      id = $this.attr('id'),
-      config;
-
-    // Config.
-    config = $.extend(
-      {
-        delay: 0,
-        hideOnClick: false,
-        hideOnEscape: false,
-        hideOnSwipe: false,
-        resetScroll: false,
-        resetForms: false,
-        side: null,
-        target: $this,
-        visibleClass: 'visible',
-      },
-      userConfig,
-    );
-
-    // Fix: Check if it's a jQuery object correctly
-    if (!(config.target instanceof jQuery)) config.target = $(config.target);
-
-    // Panel Methods.
-    $this._hide = function (event) {
-      if (!config.target.hasClass(config.visibleClass)) return;
-
-      if (event) {
-        event.preventDefault();
-        event.stopPropagation();
-      }
-
-      config.target.removeClass(config.visibleClass);
-
-      window.setTimeout(function () {
-        if (config.resetScroll) $this.scrollTop(0);
-
-        if (config.resetForms)
-          $this.find('form').each(function () {
-            this.reset();
-          });
-      }, config.delay);
+  function panel(elements, userConfig) {
+    const defaults = {
+      delay: 0,
+      hideOnClick: false,
+      hideOnEscape: false,
+      hideOnSwipe: false,
+      resetScroll: false,
+      resetForms: false,
+      side: null,
+      target: null,
+      visibleClass: 'visible',
     };
 
-    // Vendor fixes.
-    $this
-      .css('-ms-overflow-style', '-ms-autohiding-scrollbar')
-      .css('-webkit-overflow-scrolling', 'touch');
-
-    // Hide on click.
-    if (config.hideOnClick) {
-      $this.find('a').css('-webkit-tap-highlight-color', 'rgba(0,0,0,0)');
-      $this.on('click', 'a', function (event) {
-        var $a = $(this),
-          href = $a.attr('href'),
-          target = $a.attr('target');
-
-        if (!href || href == '#' || href == '' || href == '#' + id) return;
-
-        event.preventDefault();
-        event.stopPropagation();
-        $this._hide();
-
-        window.setTimeout(function () {
-          if (target == '_blank') window.open(href);
-          else window.location.href = href;
-        }, config.delay + 10);
+    return toElements(elements).map((panelElement) => {
+      const config = Object.assign({}, defaults, userConfig, {
+        target: (userConfig && userConfig.target instanceof Element && userConfig.target) || panelElement,
       });
-    }
+      const id = panelElement.id;
+      let touchStart = null;
 
-    // Touch events.
-    $this.on('touchstart', function (event) {
-      $this.touchPosX = event.originalEvent.touches[0].pageX;
-      $this.touchPosY = event.originalEvent.touches[0].pageY;
-    });
-
-    $this.on('touchmove', function (event) {
-      if ($this.touchPosX === null || $this.touchPosY === null) return;
-
-      var diffX = $this.touchPosX - event.originalEvent.touches[0].pageX,
-        diffY = $this.touchPosY - event.originalEvent.touches[0].pageY,
-        th = $this.outerHeight(),
-        ts = $this.get(0).scrollHeight - $this.scrollTop();
-
-      if (config.hideOnSwipe) {
-        var result = false,
-          boundary = 20,
-          delta = 50;
-        switch (config.side) {
-          case 'left':
-            result = Math.abs(diffY) < boundary && diffX > delta;
-            break;
-          case 'right':
-            result = Math.abs(diffY) < boundary && diffX < -1 * delta;
-            break;
-          case 'top':
-            result = Math.abs(diffX) < boundary && diffY > delta;
-            break;
-          case 'bottom':
-            result = Math.abs(diffX) < boundary && diffY < -1 * delta;
-            break;
+      function hide(event) {
+        if (!config.target.classList.contains(config.visibleClass)) return;
+        if (event) {
+          event.preventDefault();
+          event.stopPropagation();
         }
-        if (result) {
-          $this.touchPosX = null;
-          $this.touchPosY = null;
-          $this._hide();
-          return false;
-        }
+        config.target.classList.remove(config.visibleClass);
+        window.setTimeout(() => {
+          if (config.resetScroll) panelElement.scrollTop = 0;
+          if (config.resetForms) panelElement.querySelectorAll('form').forEach((form) => form.reset());
+        }, config.delay);
       }
 
-      if (
-        ($this.scrollTop() < 0 && diffY < 0) ||
-        (ts > th - 2 && ts < th + 2 && diffY > 0)
-      ) {
-        event.preventDefault();
-        event.stopPropagation();
-      }
-    });
+      panelElement.style.msOverflowStyle = '-ms-autohiding-scrollbar';
+      panelElement.style.webkitOverflowScrolling = 'touch';
 
-    $this.on('click touchend touchstart touchmove', function (event) {
-      event.stopPropagation();
-    });
-
-    $this.on('click', 'a[href="#' + id + '"]', function (event) {
-      event.preventDefault();
-      event.stopPropagation();
-      config.target.removeClass(config.visibleClass);
-    });
-
-    $body.on('click touchend', function (event) {
-      $this._hide(event);
-    });
-
-    $body.on('click', 'a[href="#' + id + '"]', function (event) {
-      event.preventDefault();
-      event.stopPropagation();
-      config.target.toggleClass(config.visibleClass);
-    });
-
-    if (config.hideOnEscape) {
-      $window.on('keydown', function (event) {
-        if (event.keyCode == 27) $this._hide(event);
-      });
-    }
-
-    return $this;
-  };
-
-  /**
-   * Placeholder polyfill.
-   */
-  $.fn.placeholder = function () {
-    if (typeof document.createElement('input').placeholder != 'undefined')
-      return $(this);
-
-    if (this.length == 0) return $(this);
-
-    if (this.length > 1) {
-      for (var i = 0; i < this.length; i++) $(this[i]).placeholder();
-      return $(this);
-    }
-
-    var $this = $(this);
-
-    $this
-      .find('input[type=text],textarea')
-      .each(function () {
-        var i = $(this);
-        if (i.val() == '' || i.val() == i.attr('placeholder'))
-          i.addClass('polyfill-placeholder').val(i.attr('placeholder'));
-      })
-      .on('blur', function () {
-        var i = $(this);
-        if (i.attr('name').match(/-polyfill-field$/)) return;
-        if (i.val() == '')
-          i.addClass('polyfill-placeholder').val(i.attr('placeholder'));
-      })
-      .on('focus', function () {
-        var i = $(this);
-        if (i.attr('name').match(/-polyfill-field$/)) return;
-        if (i.val() == i.attr('placeholder'))
-          i.removeClass('polyfill-placeholder').val('');
-      });
-
-    $this.find('input[type=password]').each(function () {
-      var i = $(this);
-      var x = $(
-        $('<div>')
-          .append(i.clone())
-          .remove()
-          .html()
-          .replace(/type="password"/i, 'type="text"')
-          .replace(/type=password/i, 'type=text'),
-      );
-
-      if (i.attr('id') != '') x.attr('id', i.attr('id') + '-polyfill-field');
-      if (i.attr('name') != '')
-        x.attr('name', i.attr('name') + '-polyfill-field');
-
-      x.addClass('polyfill-placeholder')
-        .val(x.attr('placeholder'))
-        .insertAfter(i);
-
-      if (i.val() == '') i.hide();
-      else x.hide();
-
-      i.on('blur', function (event) {
-        event.preventDefault();
-        var x = i
-          .parent()
-          .find('input[name=' + i.attr('name') + '-polyfill-field]');
-        if (i.val() == '') {
-          i.hide();
-          x.show();
-        }
-      });
-
-      x.on('focus', function (event) {
-        event.preventDefault();
-        var i = x
-          .parent()
-          .find(
-            'input[name=' + x.attr('name').replace('-polyfill-field', '') + ']',
-          );
-        x.hide();
-        i.show().focus();
-      }).on('keypress', function (event) {
-        event.preventDefault();
-        x.val('');
-      });
-    });
-
-    $this
-      .on('submit', function () {
-        $this
-          .find('input[type=text],input[type=password],textarea')
-          .each(function () {
-            var i = $(this);
-            if (i.attr('name').match(/-polyfill-field$/)) i.attr('name', '');
-            if (i.val() == i.attr('placeholder')) {
-              i.removeClass('polyfill-placeholder');
-              i.val('');
-            }
+      if (config.hideOnClick) {
+        panelElement.querySelectorAll('a').forEach((link) => {
+          link.style.webkitTapHighlightColor = 'rgba(0,0,0,0)';
+          link.addEventListener('click', (event) => {
+            const href = link.getAttribute('href');
+            if (!href || href === '#' || href === `#${id}`) return;
+            event.preventDefault();
+            event.stopPropagation();
+            hide();
+            window.setTimeout(() => {
+              if (link.target === '_blank') window.open(href);
+              else window.location.href = href;
+            }, config.delay + 10);
           });
-      })
-      .on('reset', function (event) {
+        });
+      }
+
+      panelElement.addEventListener('touchstart', (event) => {
+        const touch = event.touches[0];
+        touchStart = touch ? { x: touch.pageX, y: touch.pageY } : null;
+      });
+      panelElement.addEventListener('touchmove', (event) => {
+        const touch = event.touches[0];
+        if (!touchStart || !touch) return;
+        const diffX = touchStart.x - touch.pageX;
+        const diffY = touchStart.y - touch.pageY;
+        const atTop = panelElement.scrollTop <= 0;
+        const atBottom = panelElement.scrollHeight - panelElement.scrollTop - panelElement.clientHeight < 2;
+        const horizontal = Math.abs(diffY) < 20;
+        const vertical = Math.abs(diffX) < 20;
+        const swipe =
+          (config.side === 'left' && horizontal && diffX > 50) ||
+          (config.side === 'right' && horizontal && diffX < -50) ||
+          (config.side === 'top' && vertical && diffY > 50) ||
+          (config.side === 'bottom' && vertical && diffY < -50);
+        if (config.hideOnSwipe && swipe) {
+          touchStart = null;
+          hide();
+          return;
+        }
+        if ((atTop && diffY < 0) || (atBottom && diffY > 0)) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+      }, { passive: false });
+      ['click', 'touchend', 'touchstart', 'touchmove'].forEach((eventName) => {
+        panelElement.addEventListener(eventName, (event) => event.stopPropagation());
+      });
+      panelElement.addEventListener('click', (event) => {
+        const link = event.target.closest(`a[href="#${id}"]`);
+        if (!link || !panelElement.contains(link)) return;
         event.preventDefault();
-        $this.find('select').val($('option:first').val());
-        $this.find('input,textarea').each(function () {
-          var i = $(this),
-            x;
-          i.removeClass('polyfill-placeholder');
-          switch (this.type) {
-            case 'password':
-              i.val(i.attr('defaultValue'));
-              x = i
-                .parent()
-                .find('input[name=' + i.attr('name') + '-polyfill-field]');
-              if (i.val() == '') {
-                i.hide();
-                x.show();
-              } else {
-                i.show();
-                x.hide();
-              }
-              break;
-            case 'checkbox':
-            case 'radio':
-              i.prop('checked', i.attr('defaultValue'));
-              break;
-            case 'text':
-            case 'textarea':
-              i.val(i.attr('defaultValue'));
-              if (i.val() == '') {
-                i.addClass('polyfill-placeholder');
-                i.val(i.attr('placeholder'));
-              }
-              break;
-            default:
-              i.val(i.attr('defaultValue'));
-              break;
+        event.stopPropagation();
+        config.target.classList.remove(config.visibleClass);
+      });
+      document.body.addEventListener('click', hide);
+      document.body.addEventListener('touchend', hide);
+      document.body.addEventListener('click', (event) => {
+        const link = event.target.closest(`a[href="#${id}"]`);
+        if (!link) return;
+        event.preventDefault();
+        event.stopPropagation();
+        config.target.classList.toggle(config.visibleClass);
+      });
+      if (config.hideOnEscape) {
+        window.addEventListener('keydown', (event) => {
+          if (event.key === 'Escape') hide(event);
+        });
+      }
+      return { element: panelElement, hide };
+    });
+  }
+
+  function placeholder(elements) {
+    if ('placeholder' in document.createElement('input')) return toElements(elements);
+    return toElements(elements).map((form) => {
+      form.querySelectorAll('input[type="text"], textarea').forEach((input) => {
+        const placeholderText = input.getAttribute('placeholder') || '';
+        if (!input.value || input.value === placeholderText) {
+          input.classList.add('polyfill-placeholder');
+          input.value = placeholderText;
+        }
+        input.addEventListener('blur', () => {
+          if (!input.value) {
+            input.classList.add('polyfill-placeholder');
+            input.value = placeholderText;
+          }
+        });
+        input.addEventListener('focus', () => {
+          if (input.value === placeholderText) {
+            input.classList.remove('polyfill-placeholder');
+            input.value = '';
           }
         });
       });
+      form.addEventListener('submit', () => {
+        form.querySelectorAll('input[type="text"], textarea').forEach((input) => {
+          if (input.value === input.getAttribute('placeholder')) input.value = '';
+        });
+      });
+      return form;
+    });
+  }
 
-    return $this;
-  };
-
-  /**
-   * Prioritize elements.
-   */
-  $.prioritize = function ($elements, condition) {
-    var key = '__prioritize';
-    if (!($elements instanceof jQuery)) $elements = $($elements);
-
-    $elements.each(function () {
-      var $e = $(this),
-        $p,
-        $parent = $e.parent();
-      if ($parent.length == 0) return;
-
-      if (!$e.data(key)) {
-        if (!condition) return;
-        $p = $e.prev();
-        if ($p.length == 0) return;
-        $e.prependTo($parent);
-        $e.data(key, $p);
-      } else {
-        if (condition) return;
-        $p = $e.data(key);
-        $e.insertAfter($p);
-        $e.removeData(key);
+  function prioritize(elements, condition) {
+    toElements(elements).forEach((element) => {
+      const parent = element.parentElement;
+      if (!parent) return;
+      const previousSibling = prioritizedElements.get(element);
+      if (!previousSibling) {
+        if (!condition || !element.previousElementSibling) return;
+        prioritizedElements.set(element, element.previousElementSibling);
+        parent.prepend(element);
+      } else if (!condition) {
+        previousSibling.insertAdjacentElement('afterend', element);
+        prioritizedElements.delete(element);
       }
     });
-  };
-})(jQuery);
+  }
+
+  window.SiteUtils = { navList, panel, placeholder, prioritize };
+})();
