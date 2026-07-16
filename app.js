@@ -2,11 +2,12 @@ import express from 'express';
 import morgan from 'morgan';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import userRouter from './routes/userRoutes.js';
+
 import './models/reviewModel.js'; // ייבוא המודל של חוות הדעת כדי שהפונקציה של Populate תעבוד
 
-// ייבוא הראוטר של
+//ייבוא מנתבים
 import tourRouter from './routes/tourRoutes.js';
-// ייבוא הראוטר של התצוגות
 import viewRouter from './routes/viewRoutes.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -32,4 +33,5 @@ app.set('views', path.join(__dirname, 'views'));
 // כאן אנחנו מחברים את כל הנתיבים שמתחילים ב-tours לראוטר המתאים
 app.use('/api/v1/tours', tourRouter);
 app.use('/', viewRouter); // כל הנתיבים שמתחילים ב- / ינותבו לראוטר של התצוגות
+app.use('/api/v1/users', userRouter);
 export default app;
