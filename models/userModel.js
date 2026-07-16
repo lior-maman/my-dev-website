@@ -23,6 +23,11 @@ const userSchema = new mongoose.Schema(
       default: 'free',
     },
 
+    dashboardAccess: {
+      type: Boolean,
+      default: false,
+    },
+
     password: {
       type: String,
       required: true,

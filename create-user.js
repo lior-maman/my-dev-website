@@ -8,10 +8,10 @@ await mongoose.connect(process.env.Database_URL);
 
 try {
   const user = await User.create({
-    name: 'Lior Maman',
-    email: 'lior@example.com',
+    name: 'Test User',
+    email: 'test@test.com',
     password: '12345678',
-    plan: 'premium',
+    plan: 'free',
   });
 
   console.log('✅ User created');
