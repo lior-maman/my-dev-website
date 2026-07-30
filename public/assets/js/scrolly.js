@@ -1,6 +1,7 @@
 (function () {
   function toElements(elements) {
-    if (typeof elements === 'string') return Array.from(document.querySelectorAll(elements));
+    if (typeof elements === 'string')
+      return Array.from(document.querySelectorAll(elements));
     if (elements instanceof Element) return [elements];
     return Array.from(elements || []);
   }
@@ -16,10 +17,12 @@
     let destination = targetTop;
 
     if (options.anchor === 'middle') {
-      destination -= (window.innerHeight - target.getBoundingClientRect().height) / 2;
+      destination -=
+        (window.innerHeight - target.getBoundingClientRect().height) / 2;
     }
 
-    const offset = typeof options.offset === 'function' ? options.offset() : options.offset;
+    const offset =
+      typeof options.offset === 'function' ? options.offset() : options.offset;
     return Math.max(destination - offset, 0);
   }
 

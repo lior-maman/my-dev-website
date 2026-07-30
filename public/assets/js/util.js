@@ -2,7 +2,8 @@
   const prioritizedElements = new WeakMap();
 
   function toElements(elements) {
-    if (typeof elements === 'string') return Array.from(document.querySelectorAll(elements));
+    if (typeof elements === 'string')
+      return Array.from(document.querySelectorAll(elements));
     if (elements instanceof Element) return [elements];
     return Array.from(elements || []);
   }
@@ -42,7 +43,11 @@
 
     return toElements(elements).map((panelElement) => {
       const config = Object.assign({}, defaults, userConfig, {
-        target: (userConfig && userConfig.target instanceof Element && userConfig.target) || panelElement,
+        target:
+          (userConfig &&
+            userConfig.target instanceof Element &&
+            userConfig.target) ||
+          panelElement,
       });
       const id = panelElement.id;
       let touchStart = null;
@@ -56,7 +61,10 @@
         config.target.classList.remove(config.visibleClass);
         window.setTimeout(() => {
           if (config.resetScroll) panelElement.scrollTop = 0;
-          if (config.resetForms) panelElement.querySelectorAll('form').forEach((form) => form.reset());
+          if (config.resetForms)
+            panelElement
+              .querySelectorAll('form')
+              .forEach((form) => form.reset());
         }, config.delay);
       }
 
@@ -84,32 +92,42 @@
         const touch = event.touches[0];
         touchStart = touch ? { x: touch.pageX, y: touch.pageY } : null;
       });
-      panelElement.addEventListener('touchmove', (event) => {
-        const touch = event.touches[0];
-        if (!touchStart || !touch) return;
-        const diffX = touchStart.x - touch.pageX;
-        const diffY = touchStart.y - touch.pageY;
-        const atTop = panelElement.scrollTop <= 0;
-        const atBottom = panelElement.scrollHeight - panelElement.scrollTop - panelElement.clientHeight < 2;
-        const horizontal = Math.abs(diffY) < 20;
-        const vertical = Math.abs(diffX) < 20;
-        const swipe =
-          (config.side === 'left' && horizontal && diffX > 50) ||
-          (config.side === 'right' && horizontal && diffX < -50) ||
-          (config.side === 'top' && vertical && diffY > 50) ||
-          (config.side === 'bottom' && vertical && diffY < -50);
-        if (config.hideOnSwipe && swipe) {
-          touchStart = null;
-          hide();
-          return;
-        }
-        if ((atTop && diffY < 0) || (atBottom && diffY > 0)) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
-      }, { passive: false });
+      panelElement.addEventListener(
+        'touchmove',
+        (event) => {
+          const touch = event.touches[0];
+          if (!touchStart || !touch) return;
+          const diffX = touchStart.x - touch.pageX;
+          const diffY = touchStart.y - touch.pageY;
+          const atTop = panelElement.scrollTop <= 0;
+          const atBottom =
+            panelElement.scrollHeight -
+              panelElement.scrollTop -
+              panelElement.clientHeight <
+            2;
+          const horizontal = Math.abs(diffY) < 20;
+          const vertical = Math.abs(diffX) < 20;
+          const swipe =
+            (config.side === 'left' && horizontal && diffX > 50) ||
+            (config.side === 'right' && horizontal && diffX < -50) ||
+            (config.side === 'top' && vertical && diffY > 50) ||
+            (config.side === 'bottom' && vertical && diffY < -50);
+          if (config.hideOnSwipe && swipe) {
+            touchStart = null;
+            hide();
+            return;
+          }
+          if ((atTop && diffY < 0) || (atBottom && diffY > 0)) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+        },
+        { passive: false },
+      );
       ['click', 'touchend', 'touchstart', 'touchmove'].forEach((eventName) => {
-        panelElement.addEventListener(eventName, (event) => event.stopPropagation());
+        panelElement.addEventListener(eventName, (event) =>
+          event.stopPropagation(),
+        );
       });
       panelElement.addEventListener('click', (event) => {
         const link = event.target.closest(`a[href="#${id}"]`);
@@ -137,7 +155,8 @@
   }
 
   function placeholder(elements) {
-    if ('placeholder' in document.createElement('input')) return toElements(elements);
+    if ('placeholder' in document.createElement('input'))
+      return toElements(elements);
     return toElements(elements).map((form) => {
       form.querySelectorAll('input[type="text"], textarea').forEach((input) => {
         const placeholderText = input.getAttribute('placeholder') || '';
@@ -159,9 +178,12 @@
         });
       });
       form.addEventListener('submit', () => {
-        form.querySelectorAll('input[type="text"], textarea').forEach((input) => {
-          if (input.value === input.getAttribute('placeholder')) input.value = '';
-        });
+        form
+          .querySelectorAll('input[type="text"], textarea')
+          .forEach((input) => {
+            if (input.value === input.getAttribute('placeholder'))
+              input.value = '';
+          });
       });
       return form;
     });

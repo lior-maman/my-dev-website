@@ -4,7 +4,8 @@
   let nextId = 1;
 
   function toElements(elements) {
-    if (typeof elements === 'string') return Array.from(document.querySelectorAll(elements));
+    if (typeof elements === 'string')
+      return Array.from(document.querySelectorAll(elements));
     if (elements instanceof Element) return [elements];
     return Array.from(elements || []);
   }
@@ -12,12 +13,20 @@
   function parseOffset(value, elementHeight, viewportHeight) {
     if (typeof value !== 'string') return value;
     if (value.endsWith('%')) return (parseInt(value, 10) / 100) * elementHeight;
-    if (value.endsWith('vh')) return (parseInt(value, 10) / 100) * viewportHeight;
+    if (value.endsWith('vh'))
+      return (parseInt(value, 10) / 100) * viewportHeight;
     if (value.endsWith('px')) return parseInt(value, 10);
     return value;
   }
 
-  function isActive(mode, scrollTop, midpoint, viewportBottom, elementTop, elementBottom) {
+  function isActive(
+    mode,
+    scrollTop,
+    midpoint,
+    viewportBottom,
+    elementTop,
+    elementBottom,
+  ) {
     switch (mode) {
       case 'top':
         return scrollTop >= elementTop && elementBottom >= scrollTop;
@@ -41,8 +50,13 @@
     const rect = record.element.getBoundingClientRect();
     const elementTop = rect.top + scrollTop;
     const elementHeight = rect.height;
-    const activeTop = elementTop + parseOffset(record.options.top, elementHeight, viewportHeight);
-    const activeBottom = elementTop + elementHeight - parseOffset(record.options.bottom, elementHeight, viewportHeight);
+    const activeTop =
+      elementTop +
+      parseOffset(record.options.top, elementHeight, viewportHeight);
+    const activeBottom =
+      elementTop +
+      elementHeight -
+      parseOffset(record.options.bottom, elementHeight, viewportHeight);
     const active = isActive(
       record.options.mode,
       scrollTop,
@@ -59,7 +73,10 @@
     }
 
     if (record.options.scroll) {
-      record.options.scroll.call(record.element, (midpoint - activeTop) / (activeBottom - activeTop));
+      record.options.scroll.call(
+        record.element,
+        (midpoint - activeTop) / (activeBottom - activeTop),
+      );
     }
   }
 

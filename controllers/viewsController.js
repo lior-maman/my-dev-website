@@ -1,5 +1,3 @@
-// 1. ייבוא של המודל החדש (בנוסף ל-Tour הקיים בשורה 1)
-// eslint-disable-next-line import/no-extraneous-dependencies
 import nodemailer from 'nodemailer';
 import Tour from '../models/tourModel.js';
 import Project from '../models/projectModel.js';
@@ -21,7 +19,7 @@ export const getOverview = async (req, res) => {
   }
 };
 
-export const getEditPage = async (req, res, next) => {
+export const getEditPage = async (req, res) => {
   // 1) שליפת כל הפרויקטים מתוך בסיס הנתונים
   const projects = await Project.find();
 
@@ -55,7 +53,7 @@ export const updateProject = async (req, res) => {
   }
 };
 
-export const getProject = async (req, res, next) => {
+export const getProject = async (req, res) => {
   try {
     // 1) תופסים את ה-slug מהכתובת בשורת הדפדפן
     const { slug } = req.params;
@@ -82,7 +80,7 @@ export const getProject = async (req, res, next) => {
   }
 };
 
-export const getTour = async (req, res, next) => {
+export const getTour = async (req, res) => {
   try {
     // 1) מציאת הטיול לפי ה-slug מה-URL (כולל חוות דעת ומדריכים אם הגדרת Populating)
     const tour = await Tour.findOne({ slug: req.params.slug }).populate({

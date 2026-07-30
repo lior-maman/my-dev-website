@@ -33,12 +33,17 @@
       link.addEventListener('click', () => {
         const href = link.getAttribute('href');
         if (!href || href.charAt(0) !== '#') return;
-        sidebarLinks.forEach((sidebarLink) => sidebarLink.classList.remove('active'));
+        sidebarLinks.forEach((sidebarLink) =>
+          sidebarLink.classList.remove('active'),
+        );
         link.classList.add('active', 'active-locked');
       });
 
       const href = link.getAttribute('href');
-      const section = href && href.charAt(0) === '#' ? document.getElementById(href.slice(1)) : null;
+      const section =
+        href && href.charAt(0) === '#'
+          ? document.getElementById(href.slice(1))
+          : null;
       if (!section) return;
       Scrollex.observe(section, {
         mode: 'middle',
@@ -49,8 +54,14 @@
         },
         enter() {
           section.classList.remove('inactive');
-          if (!sidebarLinks.some((sidebarLink) => sidebarLink.classList.contains('active-locked'))) {
-            sidebarLinks.forEach((sidebarLink) => sidebarLink.classList.remove('active'));
+          if (
+            !sidebarLinks.some((sidebarLink) =>
+              sidebarLink.classList.contains('active-locked'),
+            )
+          ) {
+            sidebarLinks.forEach((sidebarLink) =>
+              sidebarLink.classList.remove('active'),
+            );
             link.classList.add('active');
           } else if (link.classList.contains('active-locked')) {
             link.classList.remove('active-locked');
@@ -63,19 +74,27 @@
   Scrolly.init(document.querySelectorAll('.scrolly'), {
     speed: 1000,
     offset() {
-      if (breakpoints.active('<=large') && !breakpoints.active('<=small') && sidebar) {
+      if (
+        breakpoints.active('<=large') &&
+        !breakpoints.active('<=small') &&
+        sidebar
+      ) {
         const styles = window.getComputedStyle(sidebar);
-        return sidebar.getBoundingClientRect().height
-          - parseFloat(styles.paddingTop)
-          - parseFloat(styles.paddingBottom)
-          - parseFloat(styles.borderTopWidth)
-          - parseFloat(styles.borderBottomWidth);
+        return (
+          sidebar.getBoundingClientRect().height -
+          parseFloat(styles.paddingTop) -
+          parseFloat(styles.paddingBottom) -
+          parseFloat(styles.borderTopWidth) -
+          parseFloat(styles.borderBottomWidth)
+        );
       }
       return 0;
     },
   });
 
-  const spotlights = Array.from(document.querySelectorAll('.spotlights > section'));
+  const spotlights = Array.from(
+    document.querySelectorAll('.spotlights > section'),
+  );
   Scrollex.observe(spotlights, {
     mode: 'middle',
     top: '-10vh',
@@ -92,7 +111,8 @@
     const img = image && image.querySelector('img');
     if (!image || !img) return;
     image.style.backgroundImage = `url(${img.getAttribute('src')})`;
-    if (img.dataset.position) image.style.backgroundPosition = img.dataset.position;
+    if (img.dataset.position)
+      image.style.backgroundPosition = img.dataset.position;
     img.style.display = 'none';
   });
 
