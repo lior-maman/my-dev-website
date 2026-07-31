@@ -10,7 +10,7 @@ export const getOverview = async (req, res) => {
 
     // ב) רינדור התבנית - מעבירים את שניהם ל-Pug
     res.status(200).render('overview', {
-      title: 'כל הטיולים והפרויקטים',
+      title: 'Lior Maman | Financial Dashboard | Investool',
       tours,
       projects, // מעכשיו המשתנה הזה זמין בתוך overview.pug
     });
