@@ -17,6 +17,14 @@ const userSchema = new mongoose.Schema(
       trim: true,
     },
 
+    // הרשאה: 'admin' רשאי לכתוב ל-DB (create/update/delete).
+    // ברירת המחדל 'user' — אף אחד לא הופך לאדמין בטעות.
+    role: {
+      type: String,
+      enum: ['user', 'admin'],
+      default: 'user',
+    },
+
     plan: {
       type: String,
       enum: ['free', 'premium'],

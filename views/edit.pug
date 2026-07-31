@@ -1,160 +1,71 @@
-doctype html
-html(lang="en" dir="ltr")
-  head
-    meta(charset="utf-8")
-    meta(name="viewport" content="width=device-width, initial-scale=1, user-scalable=no")
-    title CMS Dashboard & Project Management | Lior Maman
+extends layout
 
-    // Main CSS
-    link(rel="stylesheet" href="/assets/css/main.css")
+block content
+  main.main
+    section.section#edit-intro
+      .container-modern
+        h1.hero-title
+          | Content Editor
+        p.hero-description(style="color: var(--bs-warning);")
+          | Admin mode. Edits are written straight to the live database and take effect immediately — there is no undo.
+        a.btn-modern.btn-secondary-modern(href="/")
+          i.bi.bi-arrow-left.me-2
+          | Return to Main Site
 
-    // Bootstrap & Icons
-    link(href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet")
-    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css")
-    link(href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet")
+    // Edit Projects
+    section.section#edit-projects
+      .container-modern
+        h2.text-center.mb-3 Edit Projects
+        p.text-center.text-muted-modern.mb-5
+          | Change any field below and click Save to write that card to MongoDB. Changes are live immediately.
 
-  body.is-preload
+        .row.g-4
+          if projects
+            each project in projects
+              .col-lg-4.col-md-6
+                //- data-project-id חיוני ל-admin.js — לא לשנות.
+                .card-modern.h-100(data-project-id=project._id)
+                  img.card-img-top(src=`/img/projects/${project.imageCover}`, alt=project.name)
 
-    // Navbar
-    nav.navbar
-      .nav-container
-        ul.nav-menu
-          li
-            a.scrolly(href="#intro" class=(path === '#intro' ? 'active' : ''))
-              span Intro    
-          li
-            a.scrolly(href="#two" class=(path === '#two' ? 'active' : ''))
-              span Tech Foundations
-          li
-            a.scrolly(href="#one" class=(path === '#one' ? 'active' : ''))
-              span Edit Projects
-          li
-            a.scrolly(href="#three" class=(path === '#three' ? 'active' : ''))
-              span Tours Project
+                  .card-modern-body
+                    .mb-3
+                      label.form-label(for=`name-${project._id}`) Project Name
+                      //- class project-name-input חיוני ל-admin.js.
+                      input.form-control.project-name-input(type="text" value=project.name)
 
-    #wrapper
-      // Intro Section
-      section#intro.container-fluid.d-flex.flex-column.align-items-center.justify-content-center.text-center.min-vh-100.px-3
-        div(style="max-width: 750px;")
-          h1.main-logo CMS CONTROL PANEL
-          br
-          p.lead.mb-5(style="color: #ea580c; font-weight: bold; line-height: 1.6;") Authenticated as Admin. Any modifications made to the project cards below will write directly to the database in real-time.
-          a.button(href="/" style="background-color: #475569;") Return to Main Site
+                    .mb-3
+                      label.form-label(for=`summary-${project._id}`) Summary
+                      //- class project-summary-input חיוני ל-admin.js.
+                      textarea.form-control.project-summary-input(rows="4")= project.summary
 
-      // Two - Tech Foundations
-      section#two.wrapper.style3.fade-up
-        .inner
-          h2 Tech Foundations 
-          p Delivering robust, full-stack ecosystems built on the principles of clean architecture.
+                    if project.tags
+                      .card-tags
+                        each tag in project.tags
+                          span.card-tag= tag
 
-          .tech-stack
-            .tech-box
-              i.fab.fa-node-js.tech-icon
-              span Node.js
-            .tech-box
-              i.fas.fa-database.tech-icon
-              span MongoDB
-            .tech-box
-              i.fab.fa-js.tech-icon
-              span JavaScript
-            .tech-box
-              i.fab.fa-python.tech-icon
-              span Python
-            .tech-box
-              i.fab.fa-react.tech-icon
-              span React
-            .tech-box
-              i.fab.fa-html5.tech-icon
-              span HTML5
-            .tech-box
-              i.fab.fa-css3-alt.tech-icon
-              span CSS3
-            .tech-box
-              i.fab.fa-git-alt.tech-icon
-              span Git
-            .tech-box
-              i.fas.fa-server.tech-icon
-              span Express
-            .tech-box
-              i.fas.fa-terminal.tech-icon
-              span Command Line
+                  .card-modern-footer
+                    //- class btn-save-project חיוני ל-admin.js.
+                    button.btn-modern.btn-primary-modern.w-100.btn-save-project(type="button")
+                      i.bi.bi-save.me-2
+                      | Save Changes
 
-          .text-center.mt-5
-            a.button.scrolly(href="#one") Edit Your Projects
+    // Tours (Legacy Data)
+    section.section#edit-tours
+      .container-modern
+        h2.text-center.mb-3 Tours (Legacy Data)
+        p.text-center.text-muted-modern.mb-5
+          | Tour records pulled from the database. Read-only here — edit via the tours admin.
 
-      // One - My Projects Management Section
-      section#one.wrapper.style2.fade-up
-        .inner
-          h2.major Dynamic Project Management
-          p Modify field values directly within the form components and click save to dispatch data streams to MongoDB.
-
-          .row.row-cols-1.row-cols-md-3.g-4.mt-4
-            if projects
-              each project in projects
-                .col
-                  //- Dynamic project document binding for client-side JavaScript execution
-                  .card.h-100.shadow-sm(data-project-id=project._id style="background: #ffffff; border: 1px solid #cbd5e1;")
-                    img.card-img-top(src=`/img/projects/${project.imageCover}`, alt=project.name)
-
-                    .card-body
-                      //- Project Name Form Group
-                      .mb-3
-                        label.form-label.fw-bold.text-muted(style="font-size: 0.75rem; text-transform: uppercase;") Project Name:
-                        input.form-control.project-name-input(type="text" value=project.name style="color: #1e293b; font-weight: bold; border: 1px solid #94a3b8;")
-
-                      //- Project Summary Form Group
-                      .mb-3
-                        label.form-label.fw-bold.text-muted(style="font-size: 0.75rem; text-transform: uppercase;") Summary:
-                        textarea.form-control.project-summary-input(rows="4" style="color: #334155; font-size: 0.9rem; border: 1px solid #94a3b8;")= project.summary
-
-                      if project.tags
-                        .mt-3.d-flex.flex-wrap.gap-1
-                          each tag in project.tags
-                            span.badge.bg-secondary= tag
-
-                    .card-footer.bg-transparent.border-top-0.pt-0
-                      //- Save Trigger targeting administrative API routes
-                      button.btn.btn-success.btn-sm.w-100.btn-save-project(type="button" style="font-weight: bold; background-color: #16a34a; border: none;") Save Changes 💾
-
-      // Three - Tours Project
-      section#three.wrapper.style1.fade-up
-        .inner
-          h2.major Our Featured Tours
-          p Selected full-stack web applications fetch directly from the database ecosystem.
-
-          .row.row-cols-1.row-cols-md-3.g-4.mt-4
-            if tours
-              each tour in tours
-                .col
-                  .card.h-100.shadow-sm
-                    img.card-img-top(src=`/img/tours/${tour.imageCover}`, alt=tour.name)
-                    .card-body
-                      h5.card-title.fw-bold(style="color: #333;")= tour.name
-                      p.card-text(style="color: #555 !important;")= tour.summary
-                    .card-footer.bg-transparent.border-top-0
-                      .d-flex.justify-content-between.align-items-center
-                        span.badge.bg-success= `$${tour.price}`
-                        a.btn.btn-outline-primary.btn-sm(href=`/tour/${tour.slug}`) View Details
-
-      // Footer
-      footer#footer.py-5.mt-5(style="background-color: #f8fafc; border-top: 1px solid #e2e8f0;")
-        .inner.container.text-center
-          ul.nav.justify-content-center.mb-4
-            li.nav-item
-              a.nav-link.px-3(href="/" style="color: #475569; transition: color 0.2s;") Home
-            li.nav-item
-              a.nav-link.px-3(href="#" style="color: #475569; transition: color 0.2s;") Contact
-            li.nav-item
-              a.nav-link.px-3(href="#" style="color: #475569; transition: color 0.2s;") Privacy Policy
-
-          p.small.mb-0(style="color: #94a3b8; letter-spacing: 0.5px;") &copy; #{new Date().getFullYear()} Lior Maman. All rights reserved.
-
-    // Scripts
-    script(src="/assets/js/browser.min.js")
-    script(src="/assets/js/breakpoints.min.js")
-    script(src="/assets/js/util.js")
-    script(src="/assets/js/scrollex.js")
-    script(src="/assets/js/scrolly.js")
-    script(src="/assets/js/main.js")
-    script(src="/assets/js/admin.js")
-    script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js")
+        .row.g-4
+          if tours
+            each tour in tours
+              .col-lg-4.col-md-6
+                .card-modern.h-100
+                  img.card-img-top(src=`/img/tours/${tour.imageCover}`, alt=tour.name)
+                  .card-modern-body
+                    h3.card-modern-title= tour.name
+                    p.card-modern-description= tour.summary
+                  .card-modern-footer
+                    .d-flex.justify-content-between.align-items-center
+                      span.card-tag $#{tour.price}
+                      a.btn-modern.btn-outline-modern(href=`/tour/${tour.slug}`) View Details

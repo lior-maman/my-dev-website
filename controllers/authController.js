@@ -110,3 +110,17 @@ export const logout = (req, res) => {
     status: 'success',
   });
 };
+
+export const restrictTo =
+  (...roles) =>
+  (req, res, next) => {
+    // req.user נקבע ב-protect, שחייב לרוץ לפני זה.
+    if (!roles.includes(req.user.role)) {
+      return res.status(403).json({
+        status: 'fail',
+        message: 'You do not have permission to perform this action',
+      });
+    }
+
+    next();
+  };
