@@ -1,89 +1,64 @@
-doctype html
-html(lang="en" dir="ltr")
-  head
-    meta(charset="utf-8")
-    meta(name="viewport" content="width=device-width, initial-scale=1")
+extends ../layout
 
-    title= `${project.name} | Financial Dashboard`
+//- Feeds the dynamic <title> in the layout head
+block variables
+  - var title = `${project.name} | Financial Dashboard`
+  - var description = project.summary
 
-    link(
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    )
+//- Only the dynamic bits stay in CSS (cover image differs per project)
+block styles
+  style.
+    .project-hero {
+      background-image:
+        linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.55)),
+        url('/img/projects/#{project.imageCover}');
+      background-size: cover;
+      background-position: center;
+    }
 
-    style.
-      .hero-section {
-        background-image:
-          linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
-          url('/img/projects/#{project.imageCover}');
-        background-size: cover;
-        background-position: center;
-        height: 50vh;
-        color: white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
+block content
 
-      .tag-badge {
-        margin-right: 5px;
-        margin-bottom: 5px;
-      }
+  header.section.project-hero.text-center.text-white.d-flex.align-items-center
+    .container-modern
+      h1.display-2.fw-bold.mb-3= project.name
+      p.lead.mb-0= project.summary
 
-  body
+  section.section
+    .container-modern
+      .row.g-4
 
-    // Hero Section
-    header.hero-section
-      .text-center
-        h1.display-2.fw-bold= project.name
-        p.lead= project.summary
+        //- Overview
+        .col-lg-8
+          .surface.p-4.p-md-5.h-100
+            h2.mb-3 Overview
+            p.lead= project.description
 
-    // Main Content
-    main.container.my-5
+            if project.tags && project.tags.length
+              h3.h5.mt-4 Built With
+              .card-tags.mt-3
+                each tag in project.tags
+                  span.card-tag= tag
 
-      .row
+        //- Details sidebar
+        .col-lg-4
+          .surface.p-4.p-md-5.h-100
+            h4.mb-3 Details
 
-        // Left Column
-        .col-md-8
-
-          h2 Overview
-
-          p.lead= project.description
-
-          if project.tags && project.tags.length > 0
-
-            h3.mt-4 Built With
-
-            div.mt-2
-
-              each tag in project.tags
-                span.badge.bg-secondary.tag-badge= tag
-
-        // Right Column
-        .col-md-4
-
-          .card.shadow-sm
-
-            .card-body
-
-              h4 Details
-
-              ul.list-group.list-group-flush
-
-                if project.price
-                  li.list-group-item= `Price: $${project.price}`
-                else
-                  li.list-group-item Price: Open Source / N/A
-
-                if project.link
-                  li.list-group-item Live Demo Available
+            ul.list-unstyled.mb-4
+              li.d-flex.justify-content-between.py-2.border-bottom.border-modern
+                span.text-muted-modern Price
+                span.fw-semibold
+                  if project.price
+                    = `$${project.price}`
+                  else
+                    | Open Source / N/A
 
               if project.link
-                a.btn.btn-primary.w-100.mt-3(
-                  href=project.link
-                  target="_blank"
-                ) Launch Live Demo ↗
+                li.d-flex.justify-content-between.py-2
+                  span.text-muted-modern Live Demo
+                  span.badge.bg-success.align-self-center Available
 
-    script(
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-    )
+            if project.link
+              a.btn-modern.btn-primary-modern.w-100(href=project.link target="_blank" rel="noopener")
+                | Launch Live Demo
+                i.bi.bi-box-arrow-up-right
