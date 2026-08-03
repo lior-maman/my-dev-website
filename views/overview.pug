@@ -56,8 +56,8 @@ block content
                 img(
                   src=`/img/projects/${project.imageCover}`
                   alt=project.name
+                  class=project.isicon ? 'card-icon' : ''
                 )
-
                 .card-modern-body
 
                   h3.card-modern-title= project.name
