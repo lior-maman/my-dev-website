@@ -2,7 +2,7 @@ extends layout
 
 block content
 
-  // Hero
+  //- Hero
   section.hero#intro
 
     .hero-content
@@ -34,9 +34,7 @@ block content
         span 10 Sectors
         span Delayed Quotes
 
-
-
-  // Financial Dashboard
+  //- Financial Dashboard
   section.section#Dashboard
 
     .container-modern
@@ -73,12 +71,9 @@ block content
 
                 .card-modern-footer
 
-                  a.btn-modern.btn-outline-modern.w-100(
-                    href=`/project/${project.slug}`
-                  )
-                    span= project.buttonText
+                  a.btn-modern.btn-outline-modern(href=project.link)= project.buttonText
 
-  // Companies (previously called tours)
+  //- Companies (previously called tours)
   section.section#Companies
 
     .container-modern
@@ -87,7 +82,8 @@ block content
 
       p.text-center.text-muted-modern.mb-5
         | From AI and defense to biotech and energy — each sector is a focused watchlist, not a firehose.
-
+        | Turn one dial to move between all ten, and land on any stock to see its latest SEC filings,
+        | pulled straight from EDGAR in plain English.
       .row.g-4
 
         if tours
@@ -115,12 +111,10 @@ block content
                     span.card-tag
                       | $#{tour.price}
 
-                    a.btn-modern.btn-outline-modern(
-                      href=`/tour/${tour.slug}`
-                    )
+                    a.btn-modern.btn-outline-modern(href=`/tour/${tour.slug}`)
                       span Details
 
-  // Analytics
+  //- Analytics
   section.section#Analytics
 
     .container-modern
@@ -155,3 +149,30 @@ block content
               p.card-modern-description
                 | Read the VIX, the dollar, and the S&P's trend —
                 | each scored 1 to 10, all in one glance.
+
+        .col-md-4
+          .card-modern
+            .card-modern-body.text-center
+              i.bi.bi-fire.fs-1.mb-3
+              h3.card-modern-title Breakout Quality
+              p.card-modern-description
+                | Scores the current setup 1 to 10 by blending volatility
+                | compression, RSI, MACD and volume into one clean read.
+
+        .col-md-4
+          .card-modern
+            .card-modern-body.text-center
+              i.bi.bi-activity.fs-1.mb-3
+              h3.card-modern-title Volatility
+              p.card-modern-description
+                | Ranks today's ATR against its own trailing year —
+                | so calm or extreme reads the same on any ticker.
+
+        .col-md-4
+          .card-modern
+            .card-modern-body.text-center
+              i.bi.bi-lightbulb.fs-1.mb-3
+              h3.card-modern-title Auto Analysis
+              p.card-modern-description
+                | Reads volume and breakout together into one call —
+                | flagging the strongest combined signal, plus market fear.
