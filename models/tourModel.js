@@ -16,6 +16,10 @@ const tourSchema = new mongoose.Schema({
   ratingsQuantity: Number,
   images: [String],
   startDates: [Date],
+  isicon: {
+    type: Boolean,
+    default: false,
+  },
   locations: [
     {
       type: { type: String, default: 'Point' },

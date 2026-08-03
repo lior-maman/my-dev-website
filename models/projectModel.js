@@ -41,6 +41,10 @@ const projectSchema = new mongoose.Schema({
     type: Number,
     // אם חלק מהפרויקטים הם חינמיים או לא רלוונטיים למחיר, נשאיר את זה אופציונלי בלי required
   },
+  isicon: {
+    type: Boolean,
+    default: false,
+  },
   createdAt: {
     type: Date,
     default: Date.now(),
