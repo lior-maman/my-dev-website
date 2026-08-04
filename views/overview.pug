@@ -46,32 +46,37 @@ block content
 
       .row.g-4
 
-        if projects
-          each project in projects
 
-            .col-lg-4.col-md-6
 
-              .card-modern.h-100
+      if project
 
-                img(
-                  src=`/img/projects/${project.imageCover}`
-                  alt=project.name
-                  class=project.isicon ? 'card-icon' : ''
-                )
-                .card-modern-body
+      .col-12
 
-                  h3.card-modern-title= project.name
+        .card-modern.card-modern-wide.h-100
 
-                  p.card-modern-description= project.summary
+          img(
+            src=`/img/projects/${project.imageCover}`
+            alt=project.name
+            class=project.isicon ? 'card-icon' : ''
+          )
 
-                  if project.tags
-                    .card-tags
-                      each tag in project.tags
-                        span.card-tag= tag
+          .card-modern-content
 
-                .card-modern-footer
+            .card-modern-body
 
-                  a.btn-modern.btn-outline-modern(href=project.link)= project.buttonText
+              h3.card-modern-title= project.name
+
+              p.card-modern-description= project.summary
+
+              if project.tags
+                .card-tags
+                  each tag in project.tags
+                    span.card-tag= tag
+
+            .card-modern-footer
+
+              a.btn-modern.btn-outline-modern(href=project.link)= project.buttonText
+
 
   //- Companies (previously called tours)
   section.section#Companies
@@ -96,7 +101,7 @@ block content
                 img(
                   src=`/img/tours/${tour.imageCover}`
                   alt=tour.name
-                  class=project.isicon ? 'card-icon' : ''
+                  class=tour.isicon ? 'card-icon' : ''
                 )
 
                 .card-modern-body

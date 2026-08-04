@@ -171,3 +171,68 @@
     font-weight: 600;
 
 }
+/* ===== כרטיס רחב — פריסה אופקית (LTR) ===== */
+.card-modern-wide {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  overflow: hidden;
+  border-radius: var(--radius-lg);   /* עקביות עם שאר הכרטיסים */
+}
+
+/* התמונה בצד שמאל, תופסת ~40% מהרוחב וגובה מלא */
+.card-modern-wide > img {
+  width: 40%;
+  max-width: 480px;
+  aspect-ratio: auto;    /* מבטל את ה-16/9 שנורש מ-.card-modern img */
+  height: auto;          /* נמתח לגובה מלא בזכות align-items: stretch */
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+/* אזור התוכן (טקסט + פוטר) בצד ימין */
+.card-modern-wide .card-modern-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* ה-body — רק ריווח, בלי flex (ה-content כבר מטפל בפריסה) */
+.card-modern-wide .card-modern-body {
+  padding: 2rem 2.5rem;
+}
+
+/* אייקון (project.isicon = true) — קטן וממורכז */
+.card-modern-wide > img.card-icon {
+  width: 120px;
+  height: 120px;
+  aspect-ratio: auto;
+  object-fit: contain;
+  align-self: center;
+  margin: 2rem;
+}
+
+/* הפוטר עם הכפתור */
+.card-modern-wide .card-modern-footer {
+  padding: 0 2.5rem 2rem;
+}
+
+/* ===== מובייל: פריסה אנכית ===== */
+@media (max-width: 768px) {
+  .card-modern-wide {
+    flex-direction: column;
+  }
+  .card-modern-wide > img {
+    width: 100%;
+    max-width: none;
+    height: 220px;
+    aspect-ratio: auto;
+  }
+  .card-modern-wide .card-modern-body {
+    padding: 1.5rem;
+  }
+  .card-modern-wide .card-modern-footer {
+    padding: 0 1.5rem 1.5rem;
+  }
+}
