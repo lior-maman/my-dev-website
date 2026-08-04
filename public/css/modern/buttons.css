@@ -134,3 +134,36 @@
 
     transition: .8s;
 }
+
+/* ===== כפתור אלגנטי ממורכז — gradient זהב-שמפניה → כחול ===== */
+.project-banner-btn {
+  display: inline-flex;              /* ← מ-btn-modern: ממרכז את הטקסט */
+  align-items: center;               /* ← מ-btn-modern */
+  justify-content: center;           /* ← מ-btn-modern */
+  gap: 0.5rem;                       /* ← מ-btn-modern */
+  margin-top: 0.5rem;
+  padding: 0.9rem 2.5rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  background: linear-gradient(
+    135deg,
+    #e6c878 0%,
+    #d4af37 45%,
+    #3b82f6 100%
+  );
+  background-size: 150% 150%;
+  background-position: 0% 50%;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: var(--transition-normal);
+  box-shadow: 0 8px 24px rgba(230, 200, 120, 0.35);
+  text-decoration: none;             /* ← כי זה תגית <a>, מבטל קו תחתון */
+}
+
+.project-banner-btn:hover {
+  transform: translateY(-2px);
+  background-position: 100% 50%;
+  box-shadow: 0 12px 32px rgba(59, 130, 246, 0.4);
+}
