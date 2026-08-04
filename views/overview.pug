@@ -46,36 +46,29 @@ block content
 
       .row.g-4
 
+        if projects
+          each project, i in projects
+            if i === 0
 
+              .col-12
 
-      if project
+                .project-banner(style=`background-image: url('/img/projects/${project.imageCover}')`)
 
-      .col-12
+                  .project-banner-overlay
 
-        .card-modern.card-modern-wide.h-100
+                  .project-banner-content
 
-          img(
-            src=`/img/projects/${project.imageCover}`
-            alt=project.name
-            class=project.isicon ? 'card-icon' : ''
-          )
+                    h3.project-banner-title= project.name
 
-          .card-modern-content
+                    p.project-banner-description= project.summary
 
-            .card-modern-body
+                    if project.tags
+                      .card-tags
+                        each tag in project.tags
+                          span.card-tag= tag
 
-              h3.card-modern-title= project.name
+                    a.btn-modern.project-banner-btn(href=project.link)= project.buttonText
 
-              p.card-modern-description= project.summary
-
-              if project.tags
-                .card-tags
-                  each tag in project.tags
-                    span.card-tag= tag
-
-            .card-modern-footer
-
-              a.btn-modern.btn-outline-modern(href=project.link)= project.buttonText
 
 
   //- Companies (previously called tours)

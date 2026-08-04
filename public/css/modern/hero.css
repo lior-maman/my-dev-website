@@ -254,3 +254,111 @@ html {
     }
 
 }
+
+
+/* ===== Project Banner — כרטיס בודד עם תמונה מלאה וטקסט מעליה ===== */
+/* (נפרד לגמרי מ-.hero של הדף — אין התנגשות) */
+.project-banner {
+  position: relative;
+  min-height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-size: cover;
+  background-position: center;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  transition: var(--transition-normal);
+}
+
+.project-banner:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+/* שכבת כהות מעל התמונה — כדי שהטקסט הלבן ייקרא */
+.project-banner-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.35) 0%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+  z-index: 1;
+}
+
+/* התוכן — ממורכז, מעל ה-overlay */
+.project-banner-content {
+  position: relative;
+  z-index: 2;
+  max-width: 640px;
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.project-banner-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #fff;
+  margin: 0;
+  line-height: 1.15;
+}
+
+.project-banner-description {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* התגיות — ממורכזות ובהירות על הרקע הכהה */
+.project-banner .card-tags {
+  justify-content: center;
+}
+
+.project-banner .card-tag {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.25);
+  color: #fff;
+}
+
+/* ===== כפתור אלגנטי ממורכז ===== */
+.project-banner-btn {
+  margin-top: 0.5rem;
+  padding: 0.9rem 2.5rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #fff;
+  background: var(--color-primary);
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: var(--transition-normal);
+  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.35);
+}
+
+.project-banner-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(59, 130, 246, 0.5);
+}
+
+/* ===== מובייל ===== */
+@media (max-width: 768px) {
+  .project-banner {
+    min-height: 340px;
+  }
+  .project-banner-title {
+    font-size: 1.8rem;
+  }
+  .project-banner-description {
+    font-size: 1rem;
+  }
+  .project-banner-content {
+    padding: 1.5rem;
+  }
+}
