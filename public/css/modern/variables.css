@@ -1,21 +1,21 @@
 /* ==========================================================
-Design Tokens
-Light Theme (Default)
-========================================================== */
+   Design Tokens
+   Light Theme (Default)
+   ========================================================== */
 
 :root {
 
-/* ========= Brand Colors ========= */
+/* ========= Brand Colors — פלטת הזהב של המוצר ========= */
 
---color-primary: #3b82f6;
---color-primary-hover: #2563eb;
+--color-primary: #A8935C;          /* זהב עמום — הצבע הראשי (היה #3b82f6) */
+--color-primary-hover: #B8A56C;    /* זהב בהיר יותר ל-hover (היה #2563eb) */
 
---color-secondary: #06b6d4;
---color-accent: #8b5cf6;
+--color-secondary: #8A7A4A;        /* זהב כהה יותר — משני (היה #06b6d4) */
+--color-accent: #C9B478;           /* זהב-שמפניה — דגש בהיר (היה #8b5cf6) */
 
---color-success: #22c55e;
---color-warning: #f59e0b;
---color-danger: #ef4444;
+--color-success: #22c55e;          /* נשאר — ירוק סמנטי */
+--color-warning: #f59e0b;          /* נשאר — כתום סמנטי */
+--color-danger: #ef4444;           /* נשאר — אדום סמנטי */
 
 /* ========= Background ========= */
 
@@ -44,9 +44,7 @@ Light Theme (Default)
 /* ========= Shadow ========= */
 
 --shadow-sm: 0 2px 8px rgba(15,23,42,.05);
-
 --shadow-md: 0 10px 25px rgba(15,23,42,.08);
-
 --shadow-lg: 0 20px 40px rgba(15,23,42,.12);
 
 /* ========= Transition ========= */
@@ -66,9 +64,7 @@ Light Theme (Default)
 /* ========= Glass ========= */
 
 --glass-bg: rgba(255,255,255,.75);
-
 --glass-border: rgba(15,23,42,.08);
-
 --glass-blur: blur(18px);
 
 /* ========= Spacing ========= */
@@ -86,8 +82,8 @@ Light Theme (Default)
 }
 
 /* ==========================================================
-Dark Theme
-========================================================== */
+   Dark Theme
+   ========================================================== */
 
 [data-bs-theme="dark"] {
 

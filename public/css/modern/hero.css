@@ -3,60 +3,42 @@
    ========================================================== */
 
 .hero {
-
     min-height: 80vh;
-
     display: flex;
-
     align-items: center;
-
     justify-content: center;
-
     position: relative;
-
     overflow: hidden;
-
     text-align: center;
-
     padding-inline: 1.5rem;
-
     padding-top: 100px;
-
 }
 
 /* ==========================================================
-   Animated Background
+   Animated Background — זהב עמום + אפור (פלטת המוצר)
    ========================================================== */
 
 .hero::before {
-
     content: "";
-
     position: absolute;
-
     inset: 0;
-
     background:
         radial-gradient(
             circle at 20% 20%,
-            rgba(59,130,246,.18),
+            rgba(168, 147, 92, 0.16),        /* זהב עמום #A8935C */
             transparent 100%
         ),
-
         radial-gradient(
             circle at 80% 30%,
-            rgba(139,92,246,.18),
+            rgba(184, 165, 108, 0.12),       /* זהב מעט בהיר #B8A56C */
             transparent 100%
         ),
-
         radial-gradient(
             circle at 50% 80%,
-            rgba(6,182,212,.14),
+            rgba(150, 150, 150, 0.10),       /* אפור עדין — עומק בלי צבע */
             transparent 100%
         );
-
     z-index: 0;
-
 }
 
 /* ==========================================================
@@ -64,66 +46,43 @@
    ========================================================== */
 
 .hero-content {
-
     position: relative;
-
     z-index: 2;
-
     max-width: 1100px;
-
 }
 
 .hero-eyebrow {
-
     display: inline-block;
-
     padding: .45rem 1rem;
-
     margin-bottom: 1.5rem;
-
     border-radius: 999px;
-
-    background: rgba(255,255,255,.04);
-
-    border: 1px solid rgba(255,255,255,.08);
-
-    color: var(--color-primary);
-
+    background: rgba(168, 147, 92, 0.08);    /* רקע זהב עדין */
+    border: 1px solid rgba(168, 147, 92, 0.25);
+    color: #A8935C;                           /* טקסט זהב במקום כחול */
     font-size: .9rem;
-
     font-weight: 600;
-
 }
 
 /* ==========================================================
-   Hero Title
+   Hero Title — gradient זהב עמום → בהיר
    ========================================================== */
 
 .hero-title {
-
     margin-bottom: 1.5rem;
-
     font-weight: 800;
-
     line-height: .95;
-
 }
 
 .hero-title-gradient {
-
     background: linear-gradient(
         90deg,
-        #3b82f6,
-        #06b6d4,
-        #8b5cf6
+        #A8935C,                              /* זהב עמום */
+        #B8A56C,                              /* זהב בהיר יותר */
+        #C9B478                               /* זהב-שמפניה בקצה — נותן ניצוץ */
     );
-
     -webkit-background-clip: text;
-
     -webkit-text-fill-color: transparent;
-
     background-clip: text;
-
 }
 
 /* ==========================================================
@@ -131,17 +90,11 @@
    ========================================================== */
 
 .hero-description {
-
     font-size: 1.2rem;
-
     max-width: 700px;
-
     margin-inline: auto;
-
     margin-bottom: 2.5rem;
-
     color: var(--text-secondary);
-
 }
 
 /* ==========================================================
@@ -149,49 +102,37 @@
    ========================================================== */
 
 .hero-actions {
-
     display: flex;
-
     justify-content: center;
-
     gap: 1rem;
-
     flex-wrap: wrap;
-
 }
 
 /* ==========================================================
-   Tech Badges
+   Tech Badges — נגיעת זהב עדינה
    ========================================================== */
 
 .hero-tech {
-
     margin-top: 3rem;
-
     display: flex;
-
     justify-content: center;
-
     gap: .75rem;
-
     flex-wrap: wrap;
-
 }
 
 .hero-tech span {
-
     padding: .65rem 1rem;
-
     border-radius: 999px;
-
-    background: rgba(255,255,255,.04);
-
-    border: 1px solid rgba(255,255,255,.08);
-
+    background: rgba(168, 147, 92, 0.06);    /* רקע זהב עדין מאוד */
+    border: 1px solid rgba(168, 147, 92, 0.2);
     color: var(--text-secondary);
-
     font-size: .9rem;
+    transition: var(--transition-fast);
+}
 
+.hero-tech span:hover {
+    border-color: rgba(168, 147, 92, 0.5);   /* זהב בולט יותר ב-hover */
+    color: #A8935C;
 }
 
 /* ==========================================================
@@ -199,24 +140,16 @@
    ========================================================== */
 
 .scroll-indicator {
-
     position: absolute;
-
     bottom: 2rem;
-
     left: 50%;
-
     transform: translateX(-50%);
-
     color: var(--text-muted);
-
     font-size: .9rem;
-
     opacity: .7;
-
     animation: floatDown 2s infinite;
-
 }
+
 
 /* ==========================================================
    Animation
@@ -254,10 +187,11 @@ html {
     }
 
 }
+/* ==========================================================
+   Project Banner — כרטיס בודד, תמונה מלאה + טקסט מעליה
+   אפשרות ג': זהב המוצר (#A8935C) על מבנה הפורטפוליו (מעוגל, טוקנים)
+   ========================================================== */
 
-
-/* ===== Project Banner — כרטיס בודד עם תמונה מלאה וטקסט מעליה ===== */
-/* (נפרד לגמרי מ-.hero של הדף — אין התנגשות) */
 .project-banner {
   position: relative;
   min-height: 420px;
@@ -267,7 +201,7 @@ html {
   text-align: center;
   background-size: cover;
   background-position: center;
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-lg);           /* מעוגל — שפת הפורטפוליו */
   overflow: hidden;
   box-shadow: var(--shadow-md);
   transition: var(--transition-normal);
@@ -277,14 +211,14 @@ html {
   box-shadow: var(--shadow-lg);
 }
 
-/* שכבת כהות מעל התמונה — כדי שהטקסט הלבן ייקרא */
+/* שכבת כהות מעל התמונה — בגוון השחור של המוצר, כדי שהטקסט ייקרא */
 .project-banner-overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(0, 0, 0, 0.35) 0%,
-    rgba(0, 0, 0, 0.7) 100%
+    rgba(10, 10, 10, 0.4) 0%,
+    rgba(10, 10, 10, 0.82) 100%
   );
   z-index: 1;
 }
@@ -307,6 +241,7 @@ html {
   color: #fff;
   margin: 0;
   line-height: 1.15;
+  letter-spacing: 0.02em;
 }
 
 .project-banner-description {
@@ -316,35 +251,40 @@ html {
   margin: 0;
 }
 
-/* התגיות — ממורכזות ובהירות על הרקע הכהה */
+/* התגיות — ממורכזות, בגוון הזהב העמום של המוצר */
 .project-banner .card-tags {
   justify-content: center;
 }
 
 .project-banner .card-tag {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.25);
-  color: #fff;
+  background: rgba(168, 147, 92, 0.1);
+  border-color: rgba(168, 147, 92, 0.35);
+  color: #A8935C;
 }
 
-/* ===== כפתור אלגנטי ממורכז ===== */
+/* ===== כפתור הבנר — זהב המוצר על מבנה הפורטפוליו ===== */
 .project-banner-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
   margin-top: 0.5rem;
   padding: 0.9rem 2.5rem;
-  font-size: 1.05rem;
+  font-size: 1rem;
   font-weight: 600;
-  color: #fff;
-  background: var(--color-primary);
+  color: #0A0A0A;                            /* שחור על זהב — קריא */
+  background: #A8935C;                         /* הזהב של המוצר */
   border: none;
-  border-radius: 999px;
+  border-radius: var(--radius-md);             /* מעוגל — שפת הפורטפוליו */
   cursor: pointer;
   transition: var(--transition-normal);
-  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.35);
+  text-decoration: none;
 }
 
 .project-banner-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 32px rgba(59, 130, 246, 0.5);
+  background: #B8A56C;                         /* זהב מעט בהיר יותר ב-hover */
+  box-shadow: 0 8px 24px rgba(168, 147, 92, 0.35);
 }
 
 /* ===== מובייל ===== */

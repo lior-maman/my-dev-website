@@ -3,31 +3,19 @@
    ========================================================== */
 
 .card-modern {
-
     background: var(--bg-card);
-
     border: 1px solid var(--border-color);
-
     border-radius: var(--radius-lg);
-
     overflow: hidden;
-
     transition: var(--transition-normal);
-
     box-shadow: var(--shadow-md);
-
     height: 100%;
-
 }
 
 .card-modern:hover {
-
     transform: translateY(-8px);
-
     box-shadow: var(--shadow-lg);
-
-    border-color: rgba(59,130,246,.35);
-
+    border-color: rgba(168, 147, 92, .35);   /* זהב */
 }
 
 /* ==========================================================
@@ -35,33 +23,26 @@
    ========================================================== */
 
 .card-modern img {
-
     width: 100%;
-
     aspect-ratio: 16 / 9;
-
     object-fit: cover;
-
 }
 
 .card-modern img.card-icon {
-  width: 64px;
-  height: 64px;
-  aspect-ratio: auto;      /* מבטל את ה-16/9 שירשנו */
-  object-fit: contain;      /* מציג את האייקון שלם, לא חותך */
-  display: block;
-  margin: 1.5rem auto 0;    /* ממרכז אופקית + רווח מלמעלה */
+    width: 64px;
+    height: 64px;
+    aspect-ratio: auto;        /* מבטל את ה-16/9 שירשנו */
+    object-fit: contain;        /* מציג את האייקון שלם, לא חותך */
+    display: block;
+    margin: 1.5rem auto 0;      /* ממרכז אופקית + רווח מלמעלה */
 }
-
 
 /* ==========================================================
    Body
    ========================================================== */
 
 .card-modern-body {
-
     padding: 1.5rem;
-
 }
 
 /* ==========================================================
@@ -69,15 +50,10 @@
    ========================================================== */
 
 .card-modern-title {
-
     font-size: 1.3rem;
-
     font-weight: 700;
-
     margin-bottom: .75rem;
-
     color: var(--text-primary);
-
 }
 
 /* ==========================================================
@@ -85,15 +61,10 @@
    ========================================================== */
 
 .card-modern-description {
-
     color: var(--text-secondary);
-
     font-size: .95rem;
-
     line-height: 1.7;
-
     margin-bottom: 1rem;
-
 }
 
 /* ==========================================================
@@ -101,29 +72,18 @@
    ========================================================== */
 
 .card-tags {
-
     display: flex;
-
     flex-wrap: wrap;
-
     gap: .5rem;
-
 }
 
 .card-tag {
-
     padding: .45rem .8rem;
-
     border-radius: 999px;
-
-    background: rgba(255,255,255,.05);
-
-    border: 1px solid rgba(255,255,255,.08);
-
+    background: rgba(168, 147, 92, .06);      /* נגיעת זהב עדינה */
+    border: 1px solid rgba(168, 147, 92, .2);
     color: var(--text-muted);
-
     font-size: .8rem;
-
 }
 
 /* ==========================================================
@@ -131,9 +91,7 @@
    ========================================================== */
 
 .card-modern-footer {
-
     padding: 0 1.5rem 1.5rem;
-
 }
 
 /* ==========================================================
@@ -141,98 +99,19 @@
    ========================================================== */
 
 .card-featured {
-
     position: relative;
-
 }
 
 .card-featured::before {
-
     content: "Featured";
-
     position: absolute;
-
     top: 1rem;
-
     right: 1rem;
-
     z-index: 2;
-
-    background: var(--color-primary);
-
-    color: white;
-
+    background: var(--color-primary);          /* זהב דרך הטוקן */
+    color: #0A0A0A;                             /* שחור על זהב — קריא */
     padding: .4rem .8rem;
-
     border-radius: 999px;
-
     font-size: .75rem;
-
     font-weight: 600;
-
-}
-/* ===== כרטיס רחב — פריסה אופקית (LTR) ===== */
-.card-modern-wide {
-  display: flex;
-  flex-direction: row;
-  align-items: stretch;
-  overflow: hidden;
-  border-radius: var(--radius-lg);   /* עקביות עם שאר הכרטיסים */
-}
-
-/* התמונה בצד שמאל, תופסת ~40% מהרוחב וגובה מלא */
-.card-modern-wide > img {
-  width: 40%;
-  max-width: 480px;
-  aspect-ratio: auto;    /* מבטל את ה-16/9 שנורש מ-.card-modern img */
-  height: auto;          /* נמתח לגובה מלא בזכות align-items: stretch */
-  object-fit: cover;
-  flex-shrink: 0;
-}
-
-/* אזור התוכן (טקסט + פוטר) בצד ימין */
-.card-modern-wide .card-modern-content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-/* ה-body — רק ריווח, בלי flex (ה-content כבר מטפל בפריסה) */
-.card-modern-wide .card-modern-body {
-  padding: 2rem 2.5rem;
-}
-
-/* אייקון (project.isicon = true) — קטן וממורכז */
-.card-modern-wide > img.card-icon {
-  width: 120px;
-  height: 120px;
-  aspect-ratio: auto;
-  object-fit: contain;
-  align-self: center;
-  margin: 2rem;
-}
-
-/* הפוטר עם הכפתור */
-.card-modern-wide .card-modern-footer {
-  padding: 0 2.5rem 2rem;
-}
-
-/* ===== מובייל: פריסה אנכית ===== */
-@media (max-width: 768px) {
-  .card-modern-wide {
-    flex-direction: column;
-  }
-  .card-modern-wide > img {
-    width: 100%;
-    max-width: none;
-    height: 220px;
-    aspect-ratio: auto;
-  }
-  .card-modern-wide .card-modern-body {
-    padding: 1.5rem;
-  }
-  .card-modern-wide .card-modern-footer {
-    padding: 0 1.5rem 1.5rem;
-  }
 }
