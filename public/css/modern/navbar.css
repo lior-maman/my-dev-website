@@ -173,10 +173,12 @@
 
         border-radius: 1rem;
 
-        background: var(--glass-bg);
+        /* solid surface fallback + near-opaque tint so the glass stays subtle but readable */
+        background: var(--bg-surface);
+        background: color-mix(in srgb, var(--bg-surface) 94%, transparent);
 
-        backdrop-filter: blur(18px);
-        -webkit-backdrop-filter: blur(18px);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
 
         border: 1px solid var(--glass-border);
 

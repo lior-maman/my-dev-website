@@ -17,14 +17,10 @@ block content
       p.hero-description
         | A live market scanner for unusual volume, fresh breakouts, and market-wide fear — across ten curated sectors.
 
-      .hero-actions
+      .hero-actions.justify-content-center
         a.btn-modern.btn-primary-modern.btn-glow(href="#Dashboard")
           i.bi.bi-grid
           span Try the Live Demo
-
-        a.btn-modern.btn-secondary-modern(href="#footer")
-          i.bi.bi-envelope
-          span Contact
 
       .hero-tech
         span RVOL Scanner
@@ -67,9 +63,13 @@ block content
                         each tag in project.tags
                           span.card-tag= tag
 
-                    a.project-banner-btn(href=project.link)= project.buttonText
+                    .hero-actions
+                      a.btn-modern.btn-primary-modern.btn-glow(href=project.link)
+                        span= project.buttonText
 
-
+                      a.btn-modern.btn-secondary-modern(href="#footer")
+                        i.bi.bi-envelope
+                        span Contact
 
 
   //- Companies (previously called tours)
